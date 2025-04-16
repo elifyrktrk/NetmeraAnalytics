@@ -1,0 +1,15 @@
+{
+  "originHash" : "cf9975242a9b9e7257d208e469d8901fac894e01154c3d9d30b6bdebd7e70b84",
+  "pins" : [
+    {
+      "identity" : "swift-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Netmera/swift-sdk",
+      "state" : {
+        "revision" : "e8062e046467dd7ad43bb95c11541489d7a2086b",
+        "version" : "4.0.24"
+      }
+    }
+  ],
+  "version" : 3
+}
