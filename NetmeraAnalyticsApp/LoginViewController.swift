@@ -144,12 +144,11 @@ class LoginViewController: UIViewController {
             
             // Login successful
             print("User logged in successfully")
-            // TODO: Navigate to main app screen
-            // For now, just show a success message
-            self.showAlert(title: "Success", message: "Login successful!") { [weak self] _ in
-                // Here you would typically navigate to your main app screen
-                print("Navigate to main app screen")
-            }
+            // Navigate to Dashboard
+            let dashboardVC = DashboardViewController()
+            let navController = UINavigationController(rootViewController: dashboardVC)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true)
         }
     }
     
