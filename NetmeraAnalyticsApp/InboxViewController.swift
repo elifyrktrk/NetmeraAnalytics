@@ -1,26 +1,20 @@
 import UIKit
+import NetmeraCore
+import NetmeraNotificationCore
+import NetmeraNotificationInbox
 
 class InboxViewController: UIViewController {
     
     // MARK: - Properties
-    private var notifications: [NotificationItem] = []
+    // Step 1: Define the inbox manager
+    var inboxManager: NetmeraInboxManager?
     
     // MARK: - UI Components
-    private lazy var closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.tintColor = .label
-        button.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.delegate = self
         table.dataSource = self
-        table.register(NotificationCell.self, forCellReuseIdentifier: NotificationCell.identifier)
-        table.separatorStyle = .none
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         table.backgroundColor = .systemBackground
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
@@ -41,7 +35,7 @@ class InboxViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadNotifications()
+        setupInbox()
     }
     
     // MARK: - Setup Methods
@@ -49,11 +43,12 @@ class InboxViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Inbox"
         
-        // Add close button to navigation bar
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"),
-                                                         style: .plain,
-                                                         target: self,
-                                                         action: #selector(closeTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self,
+            action: #selector(closeTapped)
+        )
         
         view.addSubview(tableView)
         view.addSubview(emptyStateLabel)
@@ -69,21 +64,36 @@ class InboxViewController: UIViewController {
         ])
     }
     
-    private func loadNotifications() {
-        // Sample notifications - replace with actual data fetching
-        notifications = [
-            NotificationItem(title: "Daily Analytics Report",
-                           message: "Your app had 1,234 active users today",
-                           date: Date(),
-                           isRead: false),
-            NotificationItem(title: "New Event Trend Detected",
-                           message: "Unusual spike in user activity detected",
-                           date: Date().addingTimeInterval(-3600),
-                           isRead: true)
-        ]
+    private func setupInbox() {
+        // Step 2: Create a filter for fetching inbox notifications
+        let filter = NetmeraInboxFilter(
+            status: .all,                          // Show all notifications
+            pageSize: 10,                          // Number of notifications per page
+            shouldIncludeExpiredObjects: true,     // Include expired notifications
+            categories: nil                        // No category filter
+        )
         
-        emptyStateLabel.isHidden = !notifications.isEmpty
-        tableView.reloadData()
+        // Initialize inbox manager
+        inboxManager = Netmera.inboxManager(with: filter)
+        
+        // Step 3: Fetch Inbox
+        fetchInboxNotifications()
+    }
+    
+    private func fetchInboxNotifications() {
+        inboxManager?.inbox { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success:
+                if let objects = self.inboxManager?.objects {
+                    self.emptyStateLabel.isHidden = !objects.isEmpty
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Failed to fetch notifications: \(error)")
+            }
+        }
     }
     
     // MARK: - Actions
@@ -95,138 +105,57 @@ class InboxViewController: UIViewController {
 // MARK: - UITableViewDelegate & DataSource
 extension InboxViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notifications.count
+        return inboxManager?.objects.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationCell.identifier, for: indexPath) as? NotificationCell else {
-            return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        if let inboxManager = inboxManager {
+            let notification = inboxManager.objects[indexPath.row]
+            var content = cell.defaultContentConfiguration()
+            print(notification)
+//            content.text = notification.description
+//            content.secondaryText = notification.description
+            cell.contentConfiguration = content
+            
+//            // Add unread indicator
+//            if notification.pushStatus != .read {
+//                cell.accessoryView = UIView(frame: CGRect(x: 0, y: 0, width: 8, height: 8)).apply {
+//                    $0.backgroundColor = .systemBlue
+//                    $0.layer.cornerRadius = 4
+//                }
+//            } else {
+//                cell.accessoryView = nil
+//            }
         }
         
-        cell.configure(with: notifications[indexPath.row])
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 88
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        notifications[indexPath.row].isRead = true
-        tableView.reloadRows(at: [indexPath], with: .none)
+        
+        guard let inboxManager = inboxManager else { return }
+        let notification = inboxManager.objects[indexPath.row]
+        
+        // Mark as read when tapped
+//        inboxManager.updateStatus(.read, for: notification) { [weak self] result in
+//            switch result {
+//            case .success:
+//                self?.tableView.reloadRows(at: [indexPath], with: .none)
+//            case .failure(let error):
+//                print("Failed to mark notification as read: \(error)")
+//            }
+//        }
     }
 }
 
-// MARK: - Supporting Types
-struct NotificationItem {
-    let title: String
-    let message: String
-    let date: Date
-    var isRead: Bool
-}
-
-// MARK: - NotificationCell
-class NotificationCell: UITableViewCell {
-    static let identifier = "NotificationCell"
-    
-    // MARK: - UI Components
-    private let containerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .secondarySystemBackground
-        view.layer.cornerRadius = 12
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let messageLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
-        label.textColor = .secondaryLabel
-        label.numberOfLines = 2
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let dateLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 12)
-        label.textColor = .tertiaryLabel
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let unreadIndicator: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemBlue
-        view.layer.cornerRadius = 4
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    // MARK: - Initialization
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Setup
-    private func setupUI() {
-        contentView.backgroundColor = .systemBackground
-        
-        contentView.addSubview(containerView)
-        containerView.addSubview(titleLabel)
-        containerView.addSubview(messageLabel)
-        containerView.addSubview(dateLabel)
-        containerView.addSubview(unreadIndicator)
-        
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            
-            unreadIndicator.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12),
-            unreadIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor),
-            unreadIndicator.widthAnchor.constraint(equalToConstant: 8),
-            unreadIndicator.heightAnchor.constraint(equalToConstant: 8),
-            
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12),
-            titleLabel.leadingAnchor.constraint(equalTo: unreadIndicator.trailingAnchor, constant: 12),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
-            
-            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            messageLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            messageLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            
-            dateLabel.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 4),
-            dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            dateLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -12)
-        ])
-    }
-    
-    // MARK: - Configuration
-    func configure(with notification: NotificationItem) {
-        titleLabel.text = notification.title
-        messageLabel.text = notification.message
-        dateLabel.text = formatDate(notification.date)
-        unreadIndicator.isHidden = notification.isRead
-    }
-    
-    private func formatDate(_ date: Date) -> String {
-        let formatter = RelativeDateTimeFormatter()
-        formatter.unitsStyle = .short
-        return formatter.localizedString(for: date, relativeTo: Date())
+// MARK: - UIView Extension
+private extension UIView {
+    @discardableResult
+    func apply(_ closure: (Self) -> Void) -> Self {
+        closure(self)
+        return self
     }
 } 
