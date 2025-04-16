@@ -42,6 +42,8 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
             pageControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+        
+      
 
         // Kaydırılabilir sayfalar için dataSource'u tanımlıyoruz
         dataSource = self
@@ -110,8 +112,8 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
     }
 
     func goToLoginScreen() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+        // Instantiate LoginViewController directly since it's now fully programmatic
+        let loginVC = LoginViewController()
         loginVC.modalPresentationStyle = .fullScreen
         present(loginVC, animated: true)
     }
