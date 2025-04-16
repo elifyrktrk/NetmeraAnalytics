@@ -144,11 +144,7 @@ class LoginViewController: UIViewController {
             
             // Login successful
             print("User logged in successfully")
-            // Navigate to Dashboard
-            let dashboardVC = DashboardViewController()
-            let navController = UINavigationController(rootViewController: dashboardVC)
-            navController.modalPresentationStyle = .fullScreen
-            self.present(navController, animated: true)
+            self.handleLoginSuccess()
         }
     }
     
@@ -173,6 +169,14 @@ class LoginViewController: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion))
         present(alert, animated: true)
+    }
+    
+    // After successful login
+    private func handleLoginSuccess() {
+        let dashboardVC = DashboardViewController()
+        let navigationController = UINavigationController(rootViewController: dashboardVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
 }
 
