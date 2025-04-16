@@ -7,6 +7,47 @@ class DashboardViewController: UIViewController {
     private var sections: [DashboardSection] = []
     
     // MARK: - UI Components
+    private let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Try \"Users last week\""
+        searchBar.searchBarStyle = .minimal
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        return searchBar
+    }()
+    
+    private let menuButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "line.horizontal.3"), for: .normal)
+        button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let inboxButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "bell"), for: .normal)
+        button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let profileButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "person.circle"), for: .normal)
+        button.tintColor = .label
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var topStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.spacing = 12
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let layout = createCompositionalLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -36,25 +77,46 @@ class DashboardViewController: UIViewController {
     // MARK: - Setup Methods
     private func setupUI() {
         view.backgroundColor = .systemBackground
+        
+        // Add top stack view
+        view.addSubview(topStackView)
+        topStackView.addArrangedSubview(menuButton)
+        topStackView.addArrangedSubview(searchBar)
+        topStackView.addArrangedSubview(inboxButton)
+        topStackView.addArrangedSubview(profileButton)
+        
         view.addSubview(collectionView)
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            topStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            topStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            searchBar.heightAnchor.constraint(equalToConstant: 40),
+            
+            menuButton.widthAnchor.constraint(equalToConstant: 44),
+            menuButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            inboxButton.widthAnchor.constraint(equalToConstant: 44),
+            inboxButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            profileButton.widthAnchor.constraint(equalToConstant: 44),
+            profileButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            collectionView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 8),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        // Add targets for buttons
+        menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        inboxButton.addTarget(self, action: #selector(inboxButtonTapped), for: .touchUpInside)
+        profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
     }
     
     private func setupNavigationBar() {
-        title = "Analytics Dashboard"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        let logoutButton = UIBarButtonItem(title: "Logout",
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(logoutTapped))
-        navigationItem.rightBarButtonItem = logoutButton
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     private func setupRefreshControl() {
@@ -90,25 +152,18 @@ class DashboardViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @objc private func logoutTapped() {
-        let alert = UIAlertController(title: "Logout",
-                                    message: "Are you sure you want to logout?",
-                                    preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
-            do {
-                try Auth.auth().signOut()
-                // Navigate back to login
-                let loginVC = LoginViewController()
-                loginVC.modalPresentationStyle = .fullScreen
-                self?.present(loginVC, animated: true)
-            } catch {
-                self?.showAlert(title: "Error", message: "Failed to logout. Please try again.")
-            }
-        })
-        
-        present(alert, animated: true)
+    @objc private func menuButtonTapped() {
+        // Handle menu button tap
+    }
+    
+    @objc private func inboxButtonTapped() {
+        let inboxVC = InboxViewController()
+        navigationController?.pushViewController(inboxVC, animated: true)
+    }
+    
+    @objc private func profileButtonTapped() {
+        let profileVC = ProfileViewController()
+        navigationController?.pushViewController(profileVC, animated: true)
     }
     
     @objc private func refreshData() {
@@ -120,12 +175,6 @@ class DashboardViewController: UIViewController {
     }
     
     // MARK: - Helper Methods
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
     private func createCompositionalLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
             return self?.createSection()
