@@ -14,7 +14,7 @@ import NetmeraNotificationInbox
 import NetmeraAdvertisingId
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
 
 

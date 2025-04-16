@@ -9,7 +9,14 @@ import UIKit
 
 class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
-//    @IBOutlet weak var pageControl: UIPageControl!
+    // Create pageControl programmatically
+    private lazy var pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.pageIndicatorTintColor = .lightGray
+        pc.currentPageIndicatorTintColor = .black
+        pc.translatesAutoresizingMaskIntoConstraints = false // Important for Auto Layout
+        return pc
+    }()
     
     // Sayfalarımızın içeriği burada
     let pages = [
@@ -27,19 +34,27 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Add the programmatically created pageControl to the view
+        view.addSubview(pageControl)
+        
+        // Set up constraints for the pageControl
+        NSLayoutConstraint.activate([
+            pageControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+
         // Kaydırılabilir sayfalar için dataSource'u tanımlıyoruz
         dataSource = self
         delegate = self
        
-        
-//        pageControl.numberOfPages = pages.count
-//        pageControl.currentPage = 0
-//        pageControl.pageIndicatorTintColor = .lightGray
-//        pageControl.currentPageIndicatorTintColor = .black
+        pageControl.numberOfPages = pages.count
+        pageControl.currentPage = 0
 
         // İlk sayfa ne olacak?
-        if let firstVC = viewControllerAt(index: 0) {
+        if let firstVC = viewControllerAt(index: 0) as? OnboardingPageContentViewController {
             setViewControllers([firstVC], direction: .forward, animated: true)
+            // Handle initial visibility for the first page
+            firstVC.startButton.isHidden = !(0 == pages.count - 1)
         }
         
     }
@@ -83,12 +98,14 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
            let visibleVC = viewControllers?.first as? OnboardingPageContentViewController,
            let currentPage = visibleVC.page,
            let index = pages.firstIndex(where: { $0.title == currentPage.title }) {
-
+            
+            // Update the pageControl's current page
+            pageControl.currentPage = index
+            
+            // Show/hide start button based on whether it's the last page
             let isLastPage = index == pages.count - 1
             visibleVC.startButton.isHidden = !isLastPage
-//            pageControl.currentPage = index
-        
-    
+       
         }
     }
 
