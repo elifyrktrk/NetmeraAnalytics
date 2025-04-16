@@ -19,6 +19,10 @@ class DashboardViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "line.horizontal.3"), for: .normal)
         button.tintColor = .label
+        button.contentMode = .center
+        button.imageView?.contentMode = .scaleAspectFit
+        button.layer.cornerRadius = 8
+        button.backgroundColor = .clear // Clear background to see taps
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -80,6 +84,11 @@ class DashboardViewController: UIViewController {
         
         // Add top stack view
         view.addSubview(topStackView)
+        
+        // Configure menu button
+        menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        
+        // Add buttons to stack view
         topStackView.addArrangedSubview(menuButton)
         topStackView.addArrangedSubview(searchBar)
         topStackView.addArrangedSubview(inboxButton)
@@ -109,8 +118,8 @@ class DashboardViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        // Add targets for buttons
-        menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        // Configure button interactions
+        menuButton.isUserInteractionEnabled = true
         inboxButton.addTarget(self, action: #selector(inboxButtonTapped), for: .touchUpInside)
         profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
     }
@@ -153,17 +162,32 @@ class DashboardViewController: UIViewController {
     
     // MARK: - Actions
     @objc private func menuButtonTapped() {
-        // Handle menu button tap
+        print("Menu button tapped!")
+        // Look for ContainerViewController in the view hierarchy
+        var current = parent
+        while current != nil {
+            if let containerVC = current as? ContainerViewController {
+                print("ContainerVC found, toggling menu")
+                containerVC.toggleMenu()
+                return
+            }
+            current = current?.parent
+        }
+        print("ContainerVC not found! Parent hierarchy: \(String(describing: parent))")
     }
     
     @objc private func inboxButtonTapped() {
         let inboxVC = InboxViewController()
-        navigationController?.pushViewController(inboxVC, animated: true)
+        let navigationController = UINavigationController(rootViewController: inboxVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
     
     @objc private func profileButtonTapped() {
         let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: true)
+        let navigationController = UINavigationController(rootViewController: profileVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true)
     }
     
     @objc private func refreshData() {

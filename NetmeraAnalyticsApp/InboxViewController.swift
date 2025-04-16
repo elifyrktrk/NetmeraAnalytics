@@ -6,6 +6,15 @@ class InboxViewController: UIViewController {
     private var notifications: [NotificationItem] = []
     
     // MARK: - UI Components
+    private lazy var closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "xmark"), for: .normal)
+        button.tintColor = .label
+        button.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.delegate = self
@@ -40,6 +49,12 @@ class InboxViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Inbox"
         
+        // Add close button to navigation bar
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"),
+                                                         style: .plain,
+                                                         target: self,
+                                                         action: #selector(closeTapped))
+        
         view.addSubview(tableView)
         view.addSubview(emptyStateLabel)
         
@@ -69,6 +84,11 @@ class InboxViewController: UIViewController {
         
         emptyStateLabel.isHidden = !notifications.isEmpty
         tableView.reloadData()
+    }
+    
+    // MARK: - Actions
+    @objc private func closeTapped() {
+        dismiss(animated: true)
     }
 }
 

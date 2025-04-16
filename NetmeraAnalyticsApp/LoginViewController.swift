@@ -173,10 +173,19 @@ class LoginViewController: UIViewController {
     
     // After successful login
     private func handleLoginSuccess() {
+        // Create view controllers
         let dashboardVC = DashboardViewController()
         let navigationController = UINavigationController(rootViewController: dashboardVC)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true)
+        let containerVC = ContainerViewController(mainViewController: navigationController)
+        
+        // Set the container as root view controller
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window?.rootViewController = containerVC
+        } else {
+            // Fallback to present modally if we can't set root
+            containerVC.modalPresentationStyle = .fullScreen
+            present(containerVC, animated: true)
+        }
     }
 }
 

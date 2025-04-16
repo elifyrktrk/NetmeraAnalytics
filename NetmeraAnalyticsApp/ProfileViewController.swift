@@ -55,6 +55,12 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Profile"
         
+        // Add close button to navigation bar
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"),
+                                                         style: .plain,
+                                                         target: self,
+                                                         action: #selector(closeTapped))
+        
         view.addSubview(profileImageView)
         view.addSubview(nameLabel)
         view.addSubview(emailLabel)
@@ -89,6 +95,10 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Actions
+    @objc private func closeTapped() {
+        dismiss(animated: true)
+    }
+    
     @objc private func logoutTapped() {
         let alert = UIAlertController(title: "Logout",
                                     message: "Are you sure you want to logout?",

@@ -26,7 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             // User is logged in, show dashboard
             let dashboardVC = DashboardViewController()
             let navigationController = UINavigationController(rootViewController: dashboardVC)
-            window?.rootViewController = navigationController
+            let containerVC = ContainerViewController(mainViewController: navigationController)
+            window?.rootViewController = containerVC
         } else {
             // No user logged in, show login screen
             let loginVC = LoginViewController()
