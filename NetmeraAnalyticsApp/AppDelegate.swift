@@ -20,6 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        Netmera.initialize()  
+        Netmera.setLogLevel(.debug) // Options: .debug, .info, .error, .fault  
+// Use .debug mode to view detailed Netmera logs
+        Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
+        Netmera.requestLocationAuthorization()
+        // Set the delegate for the notification center
+        UNUserNotificationCenter.current().delegate = self
         return true
     }
 
@@ -36,7 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    // Handle notification when the app is in the foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        //
+    }
 
+    // Handle user interaction with notifications
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //
+    }
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
