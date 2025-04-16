@@ -12,6 +12,7 @@ import NetmeraNotification
 import NetmeraLocation
 import NetmeraNotificationInbox
 import NetmeraAdvertisingId
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -27,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Netmera.requestLocationAuthorization()
         // Set the delegate for the notification center
         UNUserNotificationCenter.current().delegate = self
+        
+        FirebaseApp.configure()
+        
         return true
     }
 

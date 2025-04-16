@@ -18,6 +18,11 @@
 		A54BD71D2DAAEF7500DF080F /* NetmeraNotificationCore in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD71C2DAAEF7500DF080F /* NetmeraNotificationCore */; };
 		A54BD71F2DAAEF7500DF080F /* NetmeraNotificationInbox in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD71E2DAAEF7500DF080F /* NetmeraNotificationInbox */; };
 		A54BD7212DAAEF7500DF080F /* NetmeraNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD7202DAAEF7500DF080F /* NetmeraNotificationServiceExtension */; };
+		A5F285C92DB0464A002913B8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285C82DB0464A002913B8 /* FirebaseAnalytics */; };
+		A5F285CB2DB0464A002913B8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285CA2DB0464A002913B8 /* FirebaseAuth */; };
+		A5F285CD2DB0464A002913B8 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285CC2DB0464A002913B8 /* FirebaseCore */; };
+		A5F285CF2DB0464A002913B8 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285CE2DB0464A002913B8 /* FirebaseDatabase */; };
+		A5F285D12DB0464A002913B8 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285D02DB0464A002913B8 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,15 +84,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5F285CF2DB0464A002913B8 /* FirebaseDatabase in Frameworks */,
 				A54BD7132DAAEF7500DF080F /* NetmeraCore in Frameworks */,
 				A54BD70F2DAAEF7500DF080F /* NetmeraAnalytic in Frameworks */,
+				A5F285C92DB0464A002913B8 /* FirebaseAnalytics in Frameworks */,
 				A54BD7152DAAEF7500DF080F /* NetmeraGeofence in Frameworks */,
+				A5F285D12DB0464A002913B8 /* FirebaseFirestore in Frameworks */,
+				A5F285CD2DB0464A002913B8 /* FirebaseCore in Frameworks */,
 				A54BD71D2DAAEF7500DF080F /* NetmeraNotificationCore in Frameworks */,
 				A54BD7192DAAEF7500DF080F /* NetmeraNotification in Frameworks */,
 				A54BD71F2DAAEF7500DF080F /* NetmeraNotificationInbox in Frameworks */,
 				A54BD7212DAAEF7500DF080F /* NetmeraNotificationServiceExtension in Frameworks */,
 				A54BD70D2DAAEF7500DF080F /* NetmeraAdvertisingId in Frameworks */,
 				A54BD7172DAAEF7500DF080F /* NetmeraLocation in Frameworks */,
+				A5F285CB2DB0464A002913B8 /* FirebaseAuth in Frameworks */,
 				A54BD71B2DAAEF7500DF080F /* NetmeraNotificationContentExtension in Frameworks */,
 				A54BD7112DAAEF7500DF080F /* NetmeraAnalyticAutotracking in Frameworks */,
 			);
@@ -161,6 +171,11 @@
 				A54BD71C2DAAEF7500DF080F /* NetmeraNotificationCore */,
 				A54BD71E2DAAEF7500DF080F /* NetmeraNotificationInbox */,
 				A54BD7202DAAEF7500DF080F /* NetmeraNotificationServiceExtension */,
+				A5F285C82DB0464A002913B8 /* FirebaseAnalytics */,
+				A5F285CA2DB0464A002913B8 /* FirebaseAuth */,
+				A5F285CC2DB0464A002913B8 /* FirebaseCore */,
+				A5F285CE2DB0464A002913B8 /* FirebaseDatabase */,
+				A5F285D02DB0464A002913B8 /* FirebaseFirestore */,
 			);
 			productName = NetmeraAnalyticsApp;
 			productReference = A54BD6D42DAAEE1200DF080F /* NetmeraAnalyticsApp.app */;
@@ -246,6 +261,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				A54BD70B2DAAEF7500DF080F /* XCRemoteSwiftPackageReference "swift-sdk" */,
+				A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A54BD6D52DAAEE1200DF080F /* Products */;
@@ -618,6 +634,14 @@
 				minimumVersion = 4.0.24;
 			};
 		};
+		A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -675,6 +699,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A54BD70B2DAAEF7500DF080F /* XCRemoteSwiftPackageReference "swift-sdk" */;
 			productName = NetmeraNotificationServiceExtension;
+		};
+		A5F285C82DB0464A002913B8 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		A5F285CA2DB0464A002913B8 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A5F285CC2DB0464A002913B8 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		A5F285CE2DB0464A002913B8 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		A5F285D02DB0464A002913B8 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
