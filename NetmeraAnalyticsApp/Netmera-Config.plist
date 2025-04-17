@@ -7,7 +7,7 @@
         <key>use_ui_scene</key>
         <false/>
         <key>api_key</key>
-        <string>gFtyH_nz5WDXzwLXrNjV-5OZX30xA0kaOeBdA_V73We8QqDC3p3eDnyvsPkBXr94</string>
+        <string>your_sdk_api_key</string>
         <key>custom_events</key>
         <array>
             <string>{YourCustomEvent}</string>
