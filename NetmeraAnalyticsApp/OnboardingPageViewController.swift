@@ -43,7 +43,6 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
             pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-      
 
         // Kaydırılabilir sayfalar için dataSource'u tanımlıyoruz
         dataSource = self
