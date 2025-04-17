@@ -23,15 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Check if user is already logged in
         if Auth.auth().currentUser != nil {
-            // User is logged in, show dashboard
-            let dashboardVC = DashboardViewController()
-            let navigationController = UINavigationController(rootViewController: dashboardVC)
-            let containerVC = ContainerViewController(mainViewController: navigationController)
-            window?.rootViewController = containerVC
+            showDashboardScreen()
         } else {
-            // No user logged in, show login screen
-            let loginVC = LoginViewController()
-            window?.rootViewController = loginVC
+            showLoginScreen()
         }
         
         window?.makeKeyAndVisible()
@@ -68,6 +62,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
+    // MARK: - Root View Controller Management
+    func showLoginScreen() {
+        let loginVC = LoginViewController()
+        window?.rootViewController = loginVC
+        window?.makeKeyAndVisible()
+    }
+    
+    func showDashboardScreen() {
+        let dashboardVC = DashboardViewController()
+        let navigationController = UINavigationController(rootViewController: dashboardVC)
+        let containerVC = ContainerViewController(mainViewController: navigationController)
+        window?.rootViewController = containerVC
+        window?.makeKeyAndVisible()
+    }
 
 }
 
