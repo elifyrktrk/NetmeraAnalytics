@@ -21,8 +21,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        // Check if user is already logged in
-        if Auth.auth().currentUser != nil {
+        // Check if user has seen onboarding
+        let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
+        
+        if !hasSeenOnboarding {
+            showOnboardingScreen()
+        } else if Auth.auth().currentUser != nil {
             showDashboardScreen()
         } else {
             showLoginScreen()
@@ -63,6 +67,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     // MARK: - Root View Controller Management
+    func showOnboardingScreen() {
+        let onboardingVC = OnboardingPageViewController()
+        window?.rootViewController = onboardingVC
+        window?.makeKeyAndVisible()
+    }
+    
     func showLoginScreen() {
         let loginVC = LoginViewController()
         window?.rootViewController = loginVC

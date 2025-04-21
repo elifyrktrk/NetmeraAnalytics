@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Override point for customization after application launch.
         Netmera.initialize()  
         Netmera.setLogLevel(.debug) // Options: .debug, .info, .error, .fault  
-// Use .debug mode to view detailed Netmera logs
+        // Use .debug mode to view detailed Netmera logs
         Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
         Netmera.requestLocationAuthorization()
         // Set the delegate for the notification center
