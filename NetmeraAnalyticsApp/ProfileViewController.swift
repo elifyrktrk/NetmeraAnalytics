@@ -199,8 +199,7 @@ class ProfileViewController: UIViewController {
     
     private func updateUserInfo() {
         if let user = Auth.auth().currentUser {
-            // Pre-fill fields if possible
-            userIdTextField.text = user.uid // Use Firebase UID as default User ID
+            // Update display labels
             nameLabel.text = user.displayName ?? "User"
             emailLabel.text = user.email
             emailTextField.text = user.email // Pre-fill email field
