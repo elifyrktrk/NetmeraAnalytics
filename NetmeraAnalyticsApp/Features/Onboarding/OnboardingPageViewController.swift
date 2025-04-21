@@ -14,8 +14,18 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
         let pc = UIPageControl()
         pc.pageIndicatorTintColor = .lightGray
         pc.currentPageIndicatorTintColor = .black
-        pc.translatesAutoresizingMaskIntoConstraints = false // Important for Auto Layout
+        pc.translatesAutoresizingMaskIntoConstraints = false
+        pc.numberOfPages = 3
+        pc.currentPage = 0
+        pc.backgroundColor = .clear // Make sure background is clear
         return pc
+    }()
+    
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     // Sayfalarımızın içeriği burada
@@ -34,22 +44,20 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Add the programmatically created pageControl to the view
-        view.addSubview(pageControl)
-        
-        // Set up constraints for the pageControl
+        // First, set up the container view
+        view.addSubview(containerView)
         NSLayoutConstraint.activate([
-            pageControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            containerView.topAnchor.constraint(equalTo: view.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-
+        setupPageControl()
+        
         // Kaydırılabilir sayfalar için dataSource'u tanımlıyoruz
         dataSource = self
         delegate = self
-       
-        pageControl.numberOfPages = pages.count
-        pageControl.currentPage = 0
 
         // İlk sayfa ne olacak?
         if let firstVC = viewControllerAt(index: 0) as? OnboardingPageContentViewController {
@@ -57,7 +65,35 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
             // Handle initial visibility for the first page
             firstVC.startButton.isHidden = !(0 == pages.count - 1)
         }
+    }
+    
+    private func setupPageControl() {
+        // Add the programmatically created pageControl to the view
+        view.addSubview(pageControl)
         
+        // Set up constraints for the pageControl with higher priority
+        NSLayoutConstraint.activate([
+            pageControl.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).withPriority(.required),
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).withPriority(.required),
+            pageControl.heightAnchor.constraint(equalToConstant: 50).withPriority(.required),
+            pageControl.widthAnchor.constraint(equalToConstant: 200).withPriority(.required)
+        ])
+        
+        // Ensure it's always on top
+        view.bringSubviewToFront(pageControl)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Ensure page control is always on top after layout
+        view.bringSubviewToFront(pageControl)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        pageControl.numberOfPages = pages.count
+        pageControl.currentPage = 0
+        view.bringSubviewToFront(pageControl)
     }
 
     // Belirli bir index'teki sayfayı bulur
@@ -128,5 +164,13 @@ class OnboardingPageViewController: UIPageViewController, UIPageViewControllerDa
           }
     }
 
+}
+
+// Add extension for constraint priority
+extension NSLayoutConstraint {
+    func withPriority(_ priority: UILayoutPriority) -> NSLayoutConstraint {
+        self.priority = priority
+        return self
+    }
 }
 
