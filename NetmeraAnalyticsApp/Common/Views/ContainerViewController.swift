@@ -56,7 +56,7 @@ class ContainerViewController: UIViewController {
         
         menuViewController.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.bounds.height)
         
-        dimmedView.frame = view.bounds
+        dimmedView.frame = CGRect(x: menuWidth, y: 0, width: view.bounds.width - menuWidth, height: view.bounds.height)
         dimmedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         print("ContainerViewController setup complete")
@@ -170,6 +170,11 @@ extension ContainerViewController: SideMenuDelegate {
             let userVC = UIViewController() // Replace with your UserViewController
             userVC.title = "User"
             navigateToViewController(userVC)
+        case "Test Netmera":
+            let testNetmeraVC = TestNetmeraViewController()
+            let navigationController = UINavigationController(rootViewController: testNetmeraVC)
+            navigationController.modalPresentationStyle = .fullScreen
+            present(navigationController, animated: true)
         case "Help":
             // Open help section
             break

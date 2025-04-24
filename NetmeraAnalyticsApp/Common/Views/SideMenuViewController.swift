@@ -22,6 +22,7 @@ class SideMenuViewController: UIViewController {
             MenuItem(icon: "person", title: "User")
         ],
         [
+            MenuItem(icon: "testtube.2", title: "Test Netmera"),
             MenuItem(icon: "questionmark.circle", title: "Help"),
             MenuItem(icon: "bubble.left", title: "Feedback"),
             MenuItem(icon: "gearshape", title: "Settings")
@@ -34,7 +35,7 @@ class SideMenuViewController: UIViewController {
     // MARK: - UI Components
     private let headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -58,7 +59,7 @@ class SideMenuViewController: UIViewController {
     
     private let accountView: UIView = {
         let view = UIView()
-        view.backgroundColor = .secondarySystemBackground
+        view.backgroundColor = .white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -85,7 +86,7 @@ class SideMenuViewController: UIViewController {
         table.delegate = self
         table.dataSource = self
         table.register(MenuItemCell.self, forCellReuseIdentifier: MenuItemCell.identifier)
-        table.backgroundColor = .systemBackground
+        table.backgroundColor = .white
         table.separatorStyle = .none
         table.rowHeight = 44
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -100,7 +101,7 @@ class SideMenuViewController: UIViewController {
     
     // MARK: - Setup Methods
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .white
         
         view.addSubview(headerView)
         headerView.addSubview(appIconImageView)
@@ -166,6 +167,7 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
         let isSelected = selectedIndexPath == indexPath
         cell.configure(with: MenuItem(icon: item.icon, title: item.title, isSelected: isSelected))
         return cell
+
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -250,7 +252,7 @@ class MenuItemCell: UITableViewCell {
             titleLabel.textColor = .systemBlue
             iconImageView.tintColor = .systemBlue
         } else {
-            backgroundColor = .clear
+            backgroundColor = .white
             titleLabel.textColor = .label
             iconImageView.tintColor = .label
         }
