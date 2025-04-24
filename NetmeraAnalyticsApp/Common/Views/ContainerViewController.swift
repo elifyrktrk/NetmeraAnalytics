@@ -145,30 +145,25 @@ extension ContainerViewController: SideMenuDelegate {
         // Handle menu item selection
         switch title {
         case "Home":
-            // Already on home/dashboard
-            break
+            let dashboardVC = DashboardViewController()
+            navigateToViewController(dashboardVC)
         case "Realtime":
-            let realtimeVC = UIViewController() // Replace with your RealtimeViewController
-            realtimeVC.title = "Realtime"
+            let realtimeVC = RealtimeViewController()
             navigateToViewController(realtimeVC)
         case "Dashboard":
             let dashboardVC = DashboardViewController()
             navigateToViewController(dashboardVC)
         case "Insights":
-            let insightsVC = UIViewController() // Replace with your InsightsViewController
-            insightsVC.title = "Insights"
+            let insightsVC = InsightsViewController()
             navigateToViewController(insightsVC)
         case "Reports snapshot":
-            let reportsVC = UIViewController() // Replace with your ReportsViewController
-            reportsVC.title = "Reports"
+            let reportsVC = ReportsViewController()
             navigateToViewController(reportsVC)
         case "Life cycle":
-            let lifecycleVC = UIViewController() // Replace with your LifecycleViewController
-            lifecycleVC.title = "Life Cycle"
+            let lifecycleVC = LifecycleViewController()
             navigateToViewController(lifecycleVC)
         case "User":
-            let userVC = UIViewController() // Replace with your UserViewController
-            userVC.title = "User"
+            let userVC = UserViewController()
             navigateToViewController(userVC)
         case "Test Netmera":
             let testNetmeraVC = TestNetmeraViewController()
@@ -176,14 +171,13 @@ extension ContainerViewController: SideMenuDelegate {
             navigationController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true)
         case "Help":
-            // Open help section
-            break
+            let helpVC = HelpViewController()
+            navigateToViewController(helpVC)
         case "Feedback":
-            // Open feedback form
-            break
+            let feedbackVC = FeedbackViewController()
+            navigateToViewController(feedbackVC)
         case "Settings":
-            let settingsVC = UIViewController() // Replace with your SettingsViewController
-            settingsVC.title = "Settings"
+            let settingsVC = SettingsViewController()
             navigateToViewController(settingsVC)
         default:
             break
