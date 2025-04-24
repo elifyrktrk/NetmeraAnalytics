@@ -94,11 +94,6 @@
                             <constraint firstItem="rYk-6G-whn" firstAttribute="centerX" secondItem="87S-9q-HpQ" secondAttribute="centerX" id="xFF-x8-n92"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="descriptionLabel" destination="ttc-7z-pM9" id="Tc8-b1-Ubg"/>
-                        <outlet property="imageView" destination="whr-lP-GkM" id="wKg-AR-7d0"/>
-                        <outlet property="titleLabel" destination="UHB-Cb-LSf" id="jgg-em-mNU"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G0X-Jg-ogg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

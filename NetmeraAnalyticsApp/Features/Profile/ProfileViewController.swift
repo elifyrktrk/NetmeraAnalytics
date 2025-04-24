@@ -2,6 +2,7 @@ import UIKit
 import FirebaseAuth
 import NetmeraCore
 
+
 class ProfileViewController: UIViewController {
     
     // MARK: - UI Components
@@ -116,6 +117,7 @@ class ProfileViewController: UIViewController {
         setupActions()
         setupKeyboardDismissal()
         updateUserInfo()
+        
     }
     
     // MARK: - Setup Methods

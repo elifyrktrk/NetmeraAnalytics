@@ -10,51 +10,119 @@ import UIKit
 class OnboardingPageContentViewController: UIViewController {
 
     var page: OnboardingPage?
-
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
     
-    // Add the Start Button programmatically
+    // Add this property to track if this is the last page
+    var isLastPage: Bool = false {
+        didSet {
+            startButton.isHidden = !isLastPage
+        }
+    }
+
+    private let containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .label
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .secondaryLabel
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Start", for: .normal)
+        button.setTitle("Get Started", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 8
-        button.isHidden = true // Hidden by default
+        button.layer.cornerRadius = 25
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
+        button.isHidden = true // Initially hidden
         return button
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
+        configureContent()
+    }
+    
+    private func setupUI() {
+        view.backgroundColor = .systemBackground
         
-        print("PAGE DEBUG:")
-            print("Title:", page?.title ?? "yok")
-            print("Desc:", page?.description ?? "yok")
-            print("Image:", page?.imageName ?? "yok")
+        // Add container view
+        view.addSubview(containerView)
         
-               
+        // Add subviews to container
+        containerView.addSubview(imageView)
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(descriptionLabel)
+        containerView.addSubview(startButton)
         
-     
-        titleLabel.text = page?.title
-        descriptionLabel.text = page?.description
-        imageView.image = UIImage(named: page?.imageName ?? "")
-        
-        // Add button to view and set constraints
-        view.addSubview(startButton)
+        // Set up constraints
         NSLayoutConstraint.activate([
-            startButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 40),
-            startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startButton.widthAnchor.constraint(equalToConstant: 200),
+            // Container view constraints
+            containerView.topAnchor.constraint(equalTo: view.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            // Image view constraints - make it larger
+            imageView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor, constant: 60),
+            imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            imageView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.7),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor),
+            
+            // Title label constraints
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32),
+            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32),
+            
+            // Description label constraints
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 32),
+            descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -32),
+            
+            // Start button constraints - moved up to avoid page control
+            startButton.bottomAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            startButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            startButton.widthAnchor.constraint(equalToConstant: 250),
             startButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
-    @objc func startButtonTapped() {
-        // Find the parent PageViewController and tell it to navigate
+    private func configureContent() {
+        titleLabel.text = page?.title
+        descriptionLabel.text = page?.description
+        imageView.image = UIImage(named: page?.imageName ?? "")
+    }
+    
+    @objc private func startButtonTapped() {
         if let parentVC = parent as? OnboardingPageViewController {
             parentVC.goToLoginScreen()
         }
