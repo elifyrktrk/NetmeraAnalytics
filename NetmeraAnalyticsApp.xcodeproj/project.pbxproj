@@ -18,6 +18,8 @@
 		A54BD71D2DAAEF7500DF080F /* NetmeraNotificationCore in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD71C2DAAEF7500DF080F /* NetmeraNotificationCore */; };
 		A54BD71F2DAAEF7500DF080F /* NetmeraNotificationInbox in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD71E2DAAEF7500DF080F /* NetmeraNotificationInbox */; };
 		A54BD7212DAAEF7500DF080F /* NetmeraNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD7202DAAEF7500DF080F /* NetmeraNotificationServiceExtension */; };
+		A5C7AA692DBFDD5C00DFE41C /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = A5C7AA682DBFDD5C00DFE41C /* OHHTTPStubs */; };
+		A5C7AA6B2DBFDD5C00DFE41C /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A5C7AA6A2DBFDD5C00DFE41C /* OHHTTPStubsSwift */; };
 		A5F285C92DB0464A002913B8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285C82DB0464A002913B8 /* FirebaseAnalytics */; };
 		A5F285CB2DB0464A002913B8 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285CA2DB0464A002913B8 /* FirebaseAuth */; };
 		A5F285CD2DB0464A002913B8 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285CC2DB0464A002913B8 /* FirebaseCore */; };
@@ -49,10 +51,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A54BD6FF2DAAEE1500DF080F /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */ = {
+		A56BE38F2DBA7C5600F221D6 /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				App/Info.plist,
+				Info.plist,
 			);
 			target = A54BD6D32DAAEE1200DF080F /* NetmeraAnalyticsApp */;
 		};
@@ -62,7 +64,7 @@
 		A54BD6D62DAAEE1200DF080F /* NetmeraAnalyticsApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A54BD6FF2DAAEE1500DF080F /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */,
+				A56BE38F2DBA7C5600F221D6 /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */,
 			);
 			path = NetmeraAnalyticsApp;
 			sourceTree = "<group>";
@@ -114,6 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5C7AA692DBFDD5C00DFE41C /* OHHTTPStubs in Frameworks */,
+				A5C7AA6B2DBFDD5C00DFE41C /* OHHTTPStubsSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -222,6 +226,8 @@
 			);
 			name = NetmeraAnalyticsAppUITests;
 			packageProductDependencies = (
+				A5C7AA682DBFDD5C00DFE41C /* OHHTTPStubs */,
+				A5C7AA6A2DBFDD5C00DFE41C /* OHHTTPStubsSwift */,
 			);
 			productName = NetmeraAnalyticsAppUITests;
 			productReference = A54BD6F72DAAEE1500DF080F /* NetmeraAnalyticsAppUITests.xctest */;
@@ -262,6 +268,7 @@
 			packageReferences = (
 				A54BD70B2DAAEF7500DF080F /* XCRemoteSwiftPackageReference "swift-sdk" */,
 				A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A5C7AA672DBFDD5C00DFE41C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A54BD6D52DAAEE1200DF080F /* Products */;
@@ -347,7 +354,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95N24W2PH8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NetmeraAnalyticsApp/App/Info.plist;
+				INFOPLIST_FILE = NetmeraAnalyticsApp/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
@@ -381,7 +388,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95N24W2PH8;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NetmeraAnalyticsApp/App/Info.plist;
+				INFOPLIST_FILE = NetmeraAnalyticsApp/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
@@ -643,7 +650,15 @@
 			repositoryURL = "https://github.com/Netmera/swift-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.24;
+				minimumVersion = 4.0.25;
+			};
+		};
+		A5C7AA672DBFDD5C00DFE41C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/OHHTTPStubs";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
 			};
 		};
 		A5F285C72DB0464A002913B8 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -711,6 +726,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A54BD70B2DAAEF7500DF080F /* XCRemoteSwiftPackageReference "swift-sdk" */;
 			productName = NetmeraNotificationServiceExtension;
+		};
+		A5C7AA682DBFDD5C00DFE41C /* OHHTTPStubs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5C7AA672DBFDD5C00DFE41C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubs;
+		};
+		A5C7AA6A2DBFDD5C00DFE41C /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5C7AA672DBFDD5C00DFE41C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
+			productName = OHHTTPStubsSwift;
 		};
 		A5F285C82DB0464A002913B8 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -51,6 +51,7 @@ class ProfileViewController: UIViewController {
         textField.placeholder = "User ID (required)"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.accessibilityIdentifier = "profile_user_id_textfield"
         return textField
     }()
     
@@ -59,6 +60,7 @@ class ProfileViewController: UIViewController {
         textField.placeholder = "Name"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.accessibilityIdentifier = "profile_name_textfield"
         return textField
     }()
     
@@ -67,6 +69,7 @@ class ProfileViewController: UIViewController {
         textField.placeholder = "Surname"
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.accessibilityIdentifier = "profile_surname_textfield"
         return textField
     }()
     
@@ -77,6 +80,7 @@ class ProfileViewController: UIViewController {
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.accessibilityIdentifier = "profile_email_textfield"
         return textField
     }()
     
@@ -87,6 +91,7 @@ class ProfileViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.accessibilityIdentifier = "profile_update_button"
         return button
     }()
     

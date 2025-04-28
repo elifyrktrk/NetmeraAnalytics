@@ -1,5 +1,5 @@
 {
-  "originHash" : "47d5091b44b507023722b5c7b8b340349627286fa8db6448235ae5e6a3aaea40",
+  "originHash" : "5fd36c3bed289afc75a5c2f85311c767960eef28f70c817e840e68575c1f7bc1",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -101,6 +101,15 @@
       }
     },
     {
+      "identity" : "ohhttpstubs",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AliSoftware/OHHTTPStubs",
+      "state" : {
+        "revision" : "12f19662426d0434d6c330c6974d53e2eb10ecd9",
+        "version" : "9.1.0"
+      }
+    },
+    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
@@ -123,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Netmera/swift-sdk",
       "state" : {
-        "revision" : "e8062e046467dd7ad43bb95c11541489d7a2086b",
-        "version" : "4.0.24"
+        "revision" : "8c8be74c95d06dd36bf22a17c07a13b870863c5c",
+        "version" : "4.0.25"
       }
     }
   ],

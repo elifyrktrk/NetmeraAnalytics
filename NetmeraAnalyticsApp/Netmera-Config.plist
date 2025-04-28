@@ -5,7 +5,7 @@
 	<key>sdk_params</key>
 	<dict>
 		<key>use_ui_scene</key>
-		<false/>
+		<true/>
 		<key>api_key</key>
 		<string>gFtyH_nz5WDXzwLXrNjV-5OZX30xA0kaOeBdA_V73We8QqDC3p3eDnyvsPkBXr94</string>
 		<key>custom_events</key>
@@ -14,7 +14,7 @@
 		</array>
 	</dict>
 	<key>location_max_active_region</key>
-	<string></string>
+	<string>20</string>
 	<key>in_app_message_settings</key>
 	<dict>
 		<key>TextColor</key>
