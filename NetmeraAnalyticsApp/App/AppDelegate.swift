@@ -50,94 +50,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     // Handle notification when the app is in the foreground
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        //
+        // Bildirimi göster
+        if #available(iOS 14.0, *) {
+             // iOS 14 ve sonrası için .banner ve .list kullanılıyor
+             completionHandler([.banner, .list, .badge, .sound])
+           } else {
+             // iOS 14 öncesi için .alert kullanılıyor
+             completionHandler([.alert, .badge, .sound])
+           }
     }
 
     // Handle user interaction with notifications
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        //
+        completionHandler()
     }
     
-/*
+
+ // MARK: - Push Notification: Cihaz başarılı şekilde push servisine kaydolduğunda çalışır
  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-   let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-   let token = tokenParts.joined()
-   print("Device Token: \(token)")
+    let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+    let token = tokenParts.joined()
+    print("Device Token: \(token)") // APNs token loglanır (push göndermek için backend'e iletilir)
  }
 
+ // MARK: - Push Notification: Cihaz push servisine kaydolamazsa çalışır
  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-   print("Failed to register: \(error)")
+    print("Failed to register: \(error)") // Kayıt hatası loglanır
  }
 
+ // MARK: - Custom URL Scheme: Uygulama custom URL (örneğin myapp://) ile açıldığında çalışır
  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-   print("SwiftDemo openUrl: \(url)")
-   if let vc = UIApplication.topViewController() {
-     vc.showAlert("Deeplink Detected", message: url.absoluteString, .alert, nil)
-   }
-   return true
+    print("SwiftDemo openUrl: \(url)")
+//    if let vc = UIApplication.topViewController() {
+//      vc.showAlert("Deeplink Detected", message: url.absoluteString, .alert, nil) // URL içeriği ekrana alert ile gösterilir
+//    }
+    return true
  }
 
+ // MARK: - Universal Link: Uygulama universal link (https://...) ile açıldığında çalışır
  func application(_ application: UIApplication,
                   continue userActivity: NSUserActivity,
                   restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool
  {
-   // Get URL components from the incoming user activity.
-   guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
-         let incomingURL = userActivity.webpageURL,
-         let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
-     return false
-   }
+    // Universal Link olup olmadığını kontrol eder
+    guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+          let incomingURL = userActivity.webpageURL,
+          let components = NSURLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
+      return false
+    }
 
-   print(incomingURL)
-   return true
+    print(incomingURL) // Universal link URL'si loglanır
+    return true
  }
 
+ // MARK: - Push Notification: Uygulama arka plandayken veya silent push geldiğinde tetiklenir
  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-   if let jsonData = try? JSONSerialization.data(withJSONObject: userInfo,
-                                                 options: [.prettyPrinted]) {
-     let jsonStringData = NSString(data: jsonData as Data, encoding: NSUTF8StringEncoding)! as String
-     print("didReceiveRemoteNotification \n \(jsonStringData)")
+    if let jsonData = try? JSONSerialization.data(withJSONObject: userInfo,
+                                                  options: [.prettyPrinted]) {
+      let jsonStringData = NSString(data: jsonData as Data, encoding: NSUTF8StringEncoding)! as String
+      print("didReceiveRemoteNotification \n \(jsonStringData)")
 
-     let pushInfo = PushInfo(date: Date(), payload: jsonStringData)
-     PushEventMonitor.shared.history.append(pushInfo)
-   }
-   completionHandler(.noData)
- }
-}
-
-extension AppDelegate: NetmeraPushDelegate {
- func shouldHandleWebViewPresentation(for pushObject: NetmeraBasePush) -> Bool {
-   return UserDefaults.standard.bool(forKey: NotificationDelegateSetting.webViewHandling.rawValue)
+//      let pushInfo = PushInfo(date: Date(), payload: jsonStringData)
+//      PushEventMonitor.shared.history.append(pushInfo) // Bildirim geçmişine eklenir
+    }
+    completionHandler(.noData)
  }
 
- func handleWebViewPresentation(for pushObject: NetmeraBasePush) {
-   print("handleWebViewPresentation")
- }
-
- func shouldHandlePresentation(for pushObject: NetmeraBasePush) -> Bool {
-   return UserDefaults.standard.bool(forKey: NotificationDelegateSetting.presentationHandling.rawValue)
- }
-
- func handlePresentation(for pushObject: NetmeraBasePush) {
-   print("handlePresentation")
- }
-
- func shouldHandleOpenURL(_ url: URL, for pushObject: NetmeraBasePush) -> Bool {
-   if url.host == "your_domain" {
-     return true
-   }
-   return UserDefaults.standard.bool(forKey: NotificationDelegateSetting.deeplinkHandling.rawValue)
- }
-
- func handleOpenURL(_ url: URL, for pushObject: NetmeraBasePush) {
-   print("handleOpenURL \(url)")
-   if let vc = UIApplication.topViewController() {
-     vc.showAlert("App handling link", message: url.absoluteString, .alert, nil)
-   }
- }
-}
-
- */
+ 
+ 
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -182,6 +162,48 @@ extension AppDelegate: NetmeraPushDelegate {
             }
         }
     }
-
+   
 }
 
+// MARK: - NetmeraPushDelegate: WebView içeren push'ların uygulama tarafından gösterilip gösterilmeyeceği belirlenir
+extension AppDelegate: NetmeraPushDelegate {
+    
+    func shouldHandleWebViewPresentation(for pushObject: NetmeraBasePush) -> Bool {
+        //    return UserDefaults.standard.bool(forKey: NotificationDelegateSetting.webViewHandling.rawValue) // Ayara göre gösterim kararı
+        return true
+    }
+    
+    // MARK: - NetmeraPushDelegate: WebView içerikli push geldiğinde yapılacak işlem
+    func handleWebViewPresentation(for pushObject: NetmeraBasePush) {
+        print("handleWebViewPresentation")
+    }
+    
+    // MARK: - NetmeraPushDelegate: Push geldiğinde uygulama içinde gösterilsin mi?
+    func shouldHandlePresentation(for pushObject: NetmeraBasePush) -> Bool {
+        //    return UserDefaults.standard.bool(forKey: NotificationDelegateSetting.presentationHandling.rawValue)
+              return true
+    }
+    
+    // MARK: - NetmeraPushDelegate: Push uygulama içinde gösterilecekse ne yapılacağı belirlenir
+    func handlePresentation(for pushObject: NetmeraBasePush) {
+        print("handlePresentation")
+    }
+    
+    // MARK: - NetmeraPushDelegate: Push ile gelen deeplink uygulama tarafından açılmalı mı?
+    func shouldHandleOpenURL(_ url: URL, for pushObject: NetmeraBasePush) -> Bool {
+        if url.host == "your_domain" {
+            return true // Özel domain kontrolü
+        }
+        //    return UserDefaults.standard.bool(forKey: NotificationDelegateSetting.deeplinkHandling.rawValue)
+        return true
+    }
+    
+    // MARK: - NetmeraPushDelegate: Push ile gelen deeplink uygulama tarafından nasıl açılacak?
+    func handleOpenURL(_ url: URL, for pushObject: NetmeraBasePush) {
+        print("handleOpenURL \(url)")
+        //    if let vc = UIApplication.topViewController() {
+        //      vc.showAlert("App handling link", message: url.absoluteString, .alert, nil) // URL içeriği alert olarak gösterilir
+    }
+    
+    
+}
