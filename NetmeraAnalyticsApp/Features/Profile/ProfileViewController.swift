@@ -84,6 +84,16 @@ class ProfileViewController: UIViewController {
         return textField
     }()
     
+    private let birthDateTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Birth Date"
+        textField.borderStyle = .roundedRect
+        textField.inputView = UIDatePicker()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.accessibilityIdentifier = "profile_birth_date_textfield"
+        return textField
+    }()
+    
     private let updateButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Update Profile", for: .normal)
@@ -96,7 +106,7 @@ class ProfileViewController: UIViewController {
     }()
     
     private lazy var stackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [userIdTextField, nameTextField, surnameTextField, emailTextField, updateButton])
+        let stack = UIStackView(arrangedSubviews: [userIdTextField, nameTextField, surnameTextField, emailTextField, birthDateTextField, updateButton])
         stack.axis = .vertical
         stack.spacing = 20
         stack.alignment = .fill
@@ -184,6 +194,7 @@ class ProfileViewController: UIViewController {
             nameTextField.heightAnchor.constraint(equalToConstant: 50),
             surnameTextField.heightAnchor.constraint(equalToConstant: 50),
             emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            birthDateTextField.heightAnchor.constraint(equalToConstant: 50),
             updateButton.heightAnchor.constraint(equalToConstant: 50),
             
             logoutButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30), // Spacing before logout
@@ -196,6 +207,13 @@ class ProfileViewController: UIViewController {
     
     private func setupActions() {
         updateButton.addTarget(self, action: #selector(updateButtonTapped), for: .touchUpInside)
+        
+        // Configure date picker
+        if let datePicker = birthDateTextField.inputView as? UIDatePicker {
+            datePicker.datePickerMode = .date
+            datePicker.maximumDate = Calendar.current.date(byAdding: .year, value: -18, to: Date()) // Minimum age 18
+            datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        }
     }
     
     private func setupKeyboardDismissal() {
@@ -207,6 +225,7 @@ class ProfileViewController: UIViewController {
     private func updateUserInfo() {
         if let user = Auth.auth().currentUser {
             // Update display labels
+           
             nameLabel.text = user.displayName ?? "User"
             emailLabel.text = user.email
             emailTextField.text = user.email // Pre-fill email field
@@ -267,7 +286,8 @@ class ProfileViewController: UIViewController {
     @objc private func updateButtonTapped() {
         dismissKeyboard() // Dismiss keyboard before proceeding
         
-        guard let userId = userIdTextField.text, !userId.isEmpty else {
+        guard let userId = userIdTextField.text,
+              !userId.isEmpty else {
             showAlert(title: "Missing Information", message: "User ID is required.")
             return
         }
@@ -282,6 +302,11 @@ class ProfileViewController: UIViewController {
         user.name = name
         user.surname = surname
         user.email = email
+        
+        // Get birth date from date picker
+        if let datePicker = birthDateTextField.inputView as? UIDatePicker {
+            user.dateOfBirth = datePicker.date
+        }
         
         // Update user information via Netmera
         Netmera.updateUser(user: user)
@@ -300,15 +325,15 @@ class ProfileViewController: UIViewController {
                          print("Firebase display name updated.")
                      }
                  }
-             } else {
-                  changeRequest.commitChanges { error in
-                       if let error = error {
-                           print("Firebase profile update error: \(error)")
-                       } else {
-                           print("Firebase display name updated.")
-                       }
-                   }
-             }
+            } else {
+                 changeRequest.commitChanges { error in
+                     if let error = error {
+                         print("Firebase profile update error: \(error)")
+                     } else {
+                         print("Firebase display name updated.")
+                     }
+                 }
+            }
         }
         
         // Show success message
@@ -316,6 +341,13 @@ class ProfileViewController: UIViewController {
         
         // Refresh displayed info
         updateUserInfo()
+    }
+    
+    @objc private func datePickerValueChanged(_ sender: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        birthDateTextField.text = dateFormatter.string(from: sender.date)
     }
     
     // MARK: - Helper Methods
