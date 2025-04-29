@@ -261,7 +261,16 @@ class SettingsViewController: UIViewController {
         for setting in settings {
             let settingView = createSettingView(title: setting.title, description: setting.description)
             stack.addArrangedSubview(settingView)
+            
+            if setting.title == "Email Notifications" {
+                settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emailNotificationsTapped)))
+            }
         }
+    }
+    
+    @objc private func emailNotificationsTapped() {
+        let emailNotificationsViewController = EmailNotificationsViewController()
+        navigationController?.pushViewController(emailNotificationsViewController, animated: true)
     }
     
     private func createSettingView(title: String, description: String) -> UIView {
