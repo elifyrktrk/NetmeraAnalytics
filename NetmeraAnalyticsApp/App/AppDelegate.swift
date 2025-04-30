@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         Netmera.setLogLevel(.debug) // Options: .debug, .info, .error, .fault  
         // Use .debug mode to view detailed Netmera logs
         Netmera.requestPushNotificationAuthorization(for: [.alert, .badge, .sound])
-        Netmera.requestLocationAuthorization()
+//        Netmera.requestLocationAuthorization()
 
         // Set the delegate for the notification center
         UNUserNotificationCenter.current().delegate = self

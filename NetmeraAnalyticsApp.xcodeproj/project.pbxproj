@@ -51,10 +51,10 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A56BE38F2DBA7C5600F221D6 /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */ = {
+		A5414B582DC2468E00CA5731 /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Config/Info.plist,
 			);
 			target = A54BD6D32DAAEE1200DF080F /* NetmeraAnalyticsApp */;
 		};
@@ -64,7 +64,7 @@
 		A54BD6D62DAAEE1200DF080F /* NetmeraAnalyticsApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A56BE38F2DBA7C5600F221D6 /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */,
+				A5414B582DC2468E00CA5731 /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */,
 			);
 			path = NetmeraAnalyticsApp;
 			sourceTree = "<group>";
@@ -353,8 +353,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95N24W2PH8;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NetmeraAnalyticsApp/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NetmeraAnalyticsApp/Resources/Config/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
@@ -387,8 +387,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 95N24W2PH8;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = NetmeraAnalyticsApp/Info.plist;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = NetmeraAnalyticsApp/Resources/Config/Info.plist;
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = "";
