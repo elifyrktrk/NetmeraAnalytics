@@ -1,6 +1,7 @@
 import UIKit
 import NetmeraLocation
 import CoreLocation
+import NetmeraCore
 
 
 class SettingsViewController: UIViewController {
@@ -264,6 +265,8 @@ class SettingsViewController: UIViewController {
             
             if setting.title == "Email Notifications" {
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emailNotificationsTapped)))
+            } else if setting.title == "In-App Notifications" {
+                settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(inAppNotificationsTapped)))
             }
         }
     }
@@ -271,6 +274,12 @@ class SettingsViewController: UIViewController {
     @objc private func emailNotificationsTapped() {
         let emailNotificationsViewController = EmailNotificationsViewController()
         navigationController?.pushViewController(emailNotificationsViewController, animated: true)
+    }
+    
+    @objc private func inAppNotificationsTapped() {
+        let inAppNotificationsViewController = InAppNotificationsViewController()
+        inAppNotificationsViewController.modalPresentationStyle = .fullScreen
+        present(inAppNotificationsViewController, animated: true)
     }
     
     private func createSettingView(title: String, description: String) -> UIView {
