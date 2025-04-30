@@ -191,11 +191,13 @@ class InAppNotificationsViewController: UIViewController {
     }
     
     private func setupSwitches() {
+        // Get initial states from UserDefaults
         popupSwitch.isOn = UserDefaults.standard.bool(forKey: "isPopupEnabled")
         bannerSwitch.isOn = UserDefaults.standard.bool(forKey: "isBannerEnabled")
         
-//        popupSwitch.addTarget(self, action: #selector(popupSwitchChanged), for: .valueChanged)
-//        bannerSwitch.addTarget(self, action: #selector(bannerSwitchChanged), for: .valueChanged)
+        // Set up target actions
+        popupSwitch.addTarget(self, action: #selector(popupSwitchChanged), for: .valueChanged)
+        bannerSwitch.addTarget(self, action: #selector(bannerSwitchChanged), for: .valueChanged)
     }
     
     private func setupMenu() {
@@ -207,26 +209,26 @@ class InAppNotificationsViewController: UIViewController {
         dismiss(animated: true)
     }
     
-//    @objc private func popupSwitchChanged(_ sender: UISwitch) {
-//        Netmera.setEnabledPopupPresentation(sender.isOn)
-//        UserDefaults.standard.set(sender.isOn, forKey: "isPopupEnabled")
-//        popupDescriptionLabel.textColor = sender.isOn ? .secondaryLabel : .systemGray
-//    }
-//    
-//    @objc private func bannerSwitchChanged(_ sender: UISwitch) {
-//        Netmera.setEnabledInAppMessagePresentation(sender.isOn)
-//        UserDefaults.standard.set(sender.isOn, forKey: "isBannerEnabled")
-//        bannerDescriptionLabel.textColor = sender.isOn ? .secondaryLabel : .systemGray
-//    }
-//    
+
     @objc private func menuButtonTapped() {
         // Implement side menu functionality here
         print("Menu button tapped")
     }
     
-//        Netmera.setEnabledBannerPresentation(sender.isOn)
-//        bannerDescriptionLabel.textColor = sender.isOn ? .secondaryLabel : .systemGray
+    @objc private func popupSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "isPopupEnabled")
+        popupDescriptionLabel.textColor = sender.isOn ? .secondaryLabel : .systemGray
+        
+        // Update Netmera settings
+        Netmera.setEnabledPopupPresentation(sender.isOn)
     }
     
-   
-
+    @objc private func bannerSwitchChanged(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "isBannerEnabled")
+        bannerDescriptionLabel.textColor = sender.isOn ? .secondaryLabel : .systemGray
+        
+        // Update Netmera settings
+        Netmera.setEnabledInAppMessagePresentation(sender.isOn)
+    }
+    
+}
