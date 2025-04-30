@@ -182,7 +182,7 @@ class EmailNotificationsViewController: UIViewController {
     // MARK: - Actions
     @objc private func emailToggleChanged(_ sender: UISwitch) {
         // Update Netmera email subscription preference
-        Netmera.setAllowedEmailSubscription(sender.isOn)
+        Netmera.setEmailSubscriptionAllowed(sender.isOn)
         
         // Update UI
         updateEmailStatus()
@@ -199,7 +199,7 @@ class EmailNotificationsViewController: UIViewController {
     // MARK: - Private Methods
     private func updateEmailStatus() {
         // Update the status label with current email subscription status
-        let status = Netmera.isAllowedEmailSubscription() ? "Enabled" : "Disabled"
+        let status = Netmera.isEmailSubscriptionAllowed() ? "Enabled" : "Disabled"
         emailDescriptionLabel.text = "Email notifications are currently \(status)"
     }
 }
