@@ -212,6 +212,11 @@ class SettingsViewController: UIViewController {
             ("In-App Notifications", "Receive in-app notifications")
         ])
         
+        // Add privacy settings
+        addSettingsToStack(privacyStack, settings: [
+            ("Advertising ID", "Manage your advertising identifier settings")
+        ])
+        
         // Add appearance settings
         addSettingsToStack(appearanceStack, settings: [
             ("Theme", "Light / Dark / System"),
@@ -287,6 +292,8 @@ class SettingsViewController: UIViewController {
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emailNotificationsTapped)))
             } else if setting.title == "In-App Notifications" {
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(inAppNotificationsTapped)))
+            } else if setting.title == "Advertising ID" {
+                settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(advertisingIDTapped)))
             }
         }
     }
@@ -311,6 +318,18 @@ class SettingsViewController: UIViewController {
         } else {
             // If no navigation controller, present modally with navigation
             let navVC = UINavigationController(rootViewController: inAppVC)
+            present(navVC, animated: true)
+        }
+    }
+    
+    @objc private func advertisingIDTapped() {
+        let adIDVC = AdvertisingIDViewController()
+        // Push to the current navigation controller if available
+        if let navController = navigationController {
+            navController.pushViewController(adIDVC, animated: true)
+        } else {
+            // If no navigation controller, present modally with navigation
+            let navVC = UINavigationController(rootViewController: adIDVC)
             present(navVC, animated: true)
         }
     }
@@ -451,7 +470,11 @@ class SettingsViewController: UIViewController {
     private func updateLocationStatusLabels() {
         // Tüm location status label'ları güncelle
         for case let view as UIView in privacyStack.arrangedSubviews {
-            if let statusLabel = view.subviews.first(where: { $0 is UILabel && ($0 as! UILabel).text == "Allowed" || ($0 as! UILabel).text == "Denied" || ($0 as! UILabel).text == "Restricted" || ($0 as! UILabel).text == "Not Set" }) as? UILabel {
+            if let statusLabel = view.subviews.first(where: { subview in
+                guard let label = subview as? UILabel, 
+                      let text = label.text else { return false }
+                return ["Allowed", "Denied", "Restricted", "Not Set"].contains(text)
+            }) as? UILabel {
                 updateLocationStatusLabel(statusLabel)
             }
         }
