@@ -150,12 +150,67 @@ class TestNetmeraViewController: UIViewController {
     // MARK: - Actions
     
     @objc private func testPushTapped() {
-        // Test push notification
-        let alert = UIAlertController(title: "Test Push",
-                                    message: "Push notification test initiated",
-                                    preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        // API endpoint
+        let url = URL(string: "https://restapi.netmera.com/rest/3.0/sendBulkNotification")!
+        
+        // Request setup
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("N79vhZlSKZCPYboSdLcJClI6d08G4mF2vMqUPR9Uvy8nBPDb_rB_8rQVPEjbkEw7", forHTTPHeaderField: "X-netmera-api-key")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Request body
+        let requestBody: [String: Any] = [
+            "message": [
+                "title": "Push Notification Title",
+                "platforms": ["IOS"],
+                "text": "This is the push notification text!"
+            ],
+            "target": [
+                "sendToAll": true
+            ]
+        ]
+        
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: requestBody, options: [])
+            request.httpBody = jsonData
+            
+            // Make the API call
+            let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                DispatchQueue.main.async {
+                    let title: String
+                    let message: String
+                    
+                    if let error = error {
+                        title = "Error"
+                        message = "Failed to send push notification: \(error.localizedDescription)"
+                    } else if let httpResponse = response as? HTTPURLResponse {
+                        if (200...299).contains(httpResponse.statusCode) {
+                            title = "Success"
+                            message = "Push notification sent successfully!"
+                        } else {
+                            title = "Error"
+                            message = "Failed with status code: \(httpResponse.statusCode)"
+                        }
+                    } else {
+                        title = "Error"
+                        message = "Unknown error occurred"
+                    }
+                    
+                    let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default))
+                    self?.present(alert, animated: true)
+                }
+            }
+            task.resume()
+            
+        } catch {
+            let alert = UIAlertController(title: "Error", 
+                                        message: "Failed to create request: \(error.localizedDescription)",
+                                        preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
     }
     
     @objc private func testInAppTapped() {
