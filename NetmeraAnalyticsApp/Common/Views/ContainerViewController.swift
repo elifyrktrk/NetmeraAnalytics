@@ -43,6 +43,16 @@ class ContainerViewController: UIViewController {
     private func setupUI() {
         print("Setting up ContainerViewController")
         
+        // Configure navigation bar appearance for the entire app
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.label]
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
         addChild(mainViewController)
         view.addSubview(mainViewController.view)
         mainViewController.didMove(toParent: self)
@@ -167,9 +177,7 @@ extension ContainerViewController: SideMenuDelegate {
             navigateToViewController(userVC)
         case "Test Netmera":
             let testNetmeraVC = TestNetmeraViewController()
-            let navigationController = UINavigationController(rootViewController: testNetmeraVC)
-            navigationController.modalPresentationStyle = .fullScreen
-            present(navigationController, animated: true)
+            navigateToViewController(testNetmeraVC)
         case "Help":
             let helpVC = HelpViewController()
             navigateToViewController(helpVC)
@@ -178,6 +186,7 @@ extension ContainerViewController: SideMenuDelegate {
             navigateToViewController(feedbackVC)
         case "Settings":
             let settingsVC = SettingsViewController()
+            // Don't create a new navigation controller, just push the view controller
             navigateToViewController(settingsVC)
         default:
             break
@@ -189,7 +198,31 @@ extension ContainerViewController: SideMenuDelegate {
     
     private func navigateToViewController(_ viewController: UIViewController) {
         if let navigationController = mainViewController as? UINavigationController {
-            navigationController.setViewControllers([viewController], animated: false)
+            // If the view controller is already in the navigation stack, just pop to it
+            if let existingVC = navigationController.viewControllers.first(where: { $0.isKind(of: type(of: viewController)) }) {
+                navigationController.popToViewController(existingVC, animated: true)
+            } else {
+                // Otherwise, push the new view controller
+                navigationController.setNavigationBarHidden(false, animated: true)
+                
+                // Set up back button for the view controller being pushed
+                if navigationController.viewControllers.count > 0 {
+                    let backButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"),
+                                                   style: .plain,
+                                                   target: self,
+                                                   action: #selector(menuButtonTapped))
+                    viewController.navigationItem.leftBarButtonItem = backButton
+                }
+                
+                navigationController.pushViewController(viewController, animated: true)
+            }
+            
+            // Ensure the navigation bar is visible
+            navigationController.setNavigationBarHidden(false, animated: true)
         }
+    }
+    
+    @objc private func menuButtonTapped() {
+        toggleMenu()
     }
 } 

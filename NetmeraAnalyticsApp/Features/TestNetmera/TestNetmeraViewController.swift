@@ -4,6 +4,21 @@ import NetmeraCore
 class TestNetmeraViewController: UIViewController {
     
     // MARK: - UI Components
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+        return scrollView
+    }()
+    
+    private let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -51,29 +66,81 @@ class TestNetmeraViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupNavigationBar()
         title = "Test Netmera"
     }
     
     // MARK: - Setup Methods
+    private func setupNavigationBar() {
+        // Always show the navigation bar
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        // Configure the navigation bar appearance
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        // Only add the menu button if we're the root view controller
+        if navigationController?.viewControllers.first === self {
+            let menuButton = UIBarButtonItem(image: UIImage(systemName: "line.horizontal.3"),
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(menuButtonTapped))
+            navigationItem.leftBarButtonItem = menuButton
+        }
+    }
+    
+    @objc private func menuButtonTapped() {
+        // Find the container view controller and toggle the menu
+        if let containerVC = navigationController?.parent as? ContainerViewController {
+            containerVC.toggleMenu()
+        }
+    }
+    
     private func setupUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemGroupedBackground
         
-        // Add close button to navigation bar
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"),
-                                                         style: .plain,
-                                                         target: self,
-                                                         action: #selector(closeTapped))
+        // Configure the view to respect the safe area
+        edgesForExtendedLayout = []
+        extendedLayoutIncludesOpaqueBars = true
         
-        view.addSubview(stackView)
+        // Add scroll view to view
+        view.addSubview(scrollView)
+        
+        // Add content view to scroll view
+        scrollView.addSubview(contentView)
+        
+        // Add stack view to content view
+        contentView.addSubview(stackView)
+        
+        // Add buttons to stack view
         stackView.addArrangedSubview(testPushButton)
         stackView.addArrangedSubview(testInAppButton)
         stackView.addArrangedSubview(testEventButton)
         
+        // Set up constraints
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            // Scroll view constraints
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
+            // Content view constraints
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            // Stack view constraints
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -20),
+            
+            // Button constraints
             testPushButton.heightAnchor.constraint(equalToConstant: 50),
             testInAppButton.heightAnchor.constraint(equalToConstant: 50),
             testEventButton.heightAnchor.constraint(equalToConstant: 50)
@@ -81,9 +148,6 @@ class TestNetmeraViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @objc private func closeTapped() {
-        dismiss(animated: true)
-    }
     
     @objc private func testPushTapped() {
         // Test push notification

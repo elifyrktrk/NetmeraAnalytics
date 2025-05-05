@@ -73,20 +73,53 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupCollectionView()
+        loadDashboardData()
+        setupButtonActions()
         setupNavigationBar()
-        configureSections()
-        setupRefreshControl()
     }
     
     // MARK: - Setup Methods
+    private func setupCollectionView() {
+        view.addSubview(collectionView)
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 16),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+        
+        // Add refresh control
+        collectionView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+    }
+    
+    private func loadDashboardData() {
+        // Call configureSections to load initial data
+        configureSections()
+    }
+    
+    private func setupButtonActions() {
+        // Set up button actions
+        profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        inboxButton.addTarget(self, action: #selector(inboxButtonTapped), for: .touchUpInside)
+    }
+    
     private func setupUI() {
         view.backgroundColor = .systemBackground
+        
+        // Configure navigation bar
+        title = "Netmera Analytics"
         
         // Add top stack view
         view.addSubview(topStackView)
         
         // Configure menu button
         menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
+        
+        // Hide the default navigation bar since we're using a custom one
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         // Add buttons to stack view
         topStackView.addArrangedSubview(menuButton)

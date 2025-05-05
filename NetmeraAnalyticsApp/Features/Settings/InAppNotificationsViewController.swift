@@ -72,36 +72,37 @@ class InAppNotificationsViewController: UIViewController {
         return label
     }()
     
-    private let menuButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "line.horizontal.3"), for: .normal)
-        button.tintColor = .label
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setupUI()
         setupConstraints()
         setupSwitches()
-        setupMenu()
+    }
+    
+    private func setupNavigationBar() {
         title = "In-App Notifications"
+        
+        // Configure back button
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
+                                      style: .plain,
+                                      target: self,
+                                      action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Setup Methods
     private func setupUI() {
         view.backgroundColor = .systemGroupedBackground
         
-        // Add close button to navigation bar
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"),
-                                                         style: .plain,
-                                                         target: self,
-                                                         action: #selector(closeTapped))
-        
-        // Add menu button to navigation bar
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: menuButton)
+        // Configure the view to respect the safe area
+        edgesForExtendedLayout = []
+        extendedLayoutIncludesOpaqueBars = true
         
         // Add scroll view to view
         view.addSubview(scrollView)
@@ -200,20 +201,7 @@ class InAppNotificationsViewController: UIViewController {
         bannerSwitch.addTarget(self, action: #selector(bannerSwitchChanged), for: .valueChanged)
     }
     
-    private func setupMenu() {
-        menuButton.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
-    }
-    
     // MARK: - Actions
-    @objc private func closeTapped() {
-        dismiss(animated: true)
-    }
-    
-
-    @objc private func menuButtonTapped() {
-        // Implement side menu functionality here
-        print("Menu button tapped")
-    }
     
     @objc private func popupSwitchChanged(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "isPopupEnabled")

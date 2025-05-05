@@ -10,6 +10,15 @@ class SettingsViewController: UIViewController {
     private let locationManager = CLLocationManager()
     
     // MARK: - UI Components
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        if #available(iOS 11.0, *) {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+        return scrollView
+    }()
+    
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -145,12 +154,23 @@ class SettingsViewController: UIViewController {
     }
     
     // MARK: - Setup Methods
+    
+    @objc private func menuButtonTapped() {
+        // Find the container view controller and toggle the menu
+        if let containerVC = navigationController?.parent as? ContainerViewController {
+            containerVC.toggleMenu()
+        }
+    }
+    
+    // MARK: - Setup Methods
     private func setupUI() {
         view.backgroundColor = .systemGroupedBackground
         
-        // Setup scroll view
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        // Configure the view to respect the safe area
+        edgesForExtendedLayout = []
+        extendedLayoutIncludesOpaqueBars = true
+        
+        // Add scroll view to view
         view.addSubview(scrollView)
         
         // Add stack view to scroll view
@@ -272,14 +292,27 @@ class SettingsViewController: UIViewController {
     }
     
     @objc private func emailNotificationsTapped() {
-        let emailNotificationsViewController = EmailNotificationsViewController()
-        navigationController?.pushViewController(emailNotificationsViewController, animated: true)
+        let emailVC = EmailNotificationsViewController()
+        // Push to the current navigation controller if available
+        if let navController = navigationController {
+            navController.pushViewController(emailVC, animated: true)
+        } else {
+            // If no navigation controller, present modally with navigation
+            let navVC = UINavigationController(rootViewController: emailVC)
+            present(navVC, animated: true)
+        }
     }
     
     @objc private func inAppNotificationsTapped() {
-        let inAppNotificationsViewController = InAppNotificationsViewController()
-        inAppNotificationsViewController.modalPresentationStyle = .fullScreen
-        present(inAppNotificationsViewController, animated: true)
+        let inAppVC = InAppNotificationsViewController()
+        // Push to the current navigation controller if available
+        if let navController = navigationController {
+            navController.pushViewController(inAppVC, animated: true)
+        } else {
+            // If no navigation controller, present modally with navigation
+            let navVC = UINavigationController(rootViewController: inAppVC)
+            present(navVC, animated: true)
+        }
     }
     
     private func createSettingView(title: String, description: String) -> UIView {

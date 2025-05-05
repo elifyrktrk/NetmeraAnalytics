@@ -74,6 +74,7 @@ class EmailNotificationsViewController: UIViewController {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBar()
         setupUI()
         setupConstraints()
         setupActions()
@@ -83,10 +84,28 @@ class EmailNotificationsViewController: UIViewController {
         updateEmailStatus()
     }
     
+    private func setupNavigationBar() {
+        title = "Email Notifications"
+        
+        // Configure back button
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.left"),
+                                      style: .plain,
+                                      target: self,
+                                      action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backButton
+    }
+    
+    @objc private func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     // MARK: - Setup Methods
     private func setupUI() {
         view.backgroundColor = .systemGroupedBackground
-        title = "Email Notifications"
+        
+        // Configure the view to respect the safe area
+        edgesForExtendedLayout = []
+        extendedLayoutIncludesOpaqueBars = true
         
         // Add scroll view to view
         view.addSubview(scrollView)
