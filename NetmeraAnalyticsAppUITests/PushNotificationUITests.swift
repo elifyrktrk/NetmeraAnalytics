@@ -31,9 +31,15 @@ class PushNotificationUITests: XCTestCase {
         
         // İşlem sonrası alert'i kapat
         let alert = app.alerts.firstMatch
-        if alert.waitForExistence(timeout: 5) {
-            alert.buttons["OK"].tap()
-        }
+//        if alert.waitForExistence(timeout: 5) {
+//            alert.buttons["OK"].tap()
+//        }
+        let pushAlert = app.alerts["Push Geldi"]
+        XCTAssertTrue(pushAlert.waitForExistence(timeout: 10), "Push alert'i çıkmadı")
+
+        // İstersen 'Tamam' butonuna bas:
+//        pushAlert.buttons["Tamam"].tap()
+
     }
     
     // MARK: - Yardımcı Metotlar

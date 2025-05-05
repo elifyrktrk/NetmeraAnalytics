@@ -59,10 +59,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
              // iOS 14 öncesi için .alert kullanılıyor
              completionHandler([.alert, .badge, .sound])
            }
+        DispatchQueue.main.async {
+               if let topVC = self.getTopViewController() {
+                   let alert = UIAlertController(title: "Push Geldi",
+                                                 message: notification.request.content.body,
+                                                 preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+                   topVC.present(alert, animated: true)
+               }
+           }
     }
 
     // Handle user interaction with notifications
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        DispatchQueue.main.async {
+               if let topVC = self.getTopViewController() {
+                   let alert = UIAlertController(title: "Push Geldi", message: response.notification.request.content.body, preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: nil))
+                   topVC.present(alert, animated: true, completion: nil)
+               }
+           }
         completionHandler()
     }
     
@@ -117,7 +133,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     completionHandler(.noData)
  }
 
- 
+    func getTopViewController(base: UIViewController? = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return getTopViewController(base: nav.visibleViewController)
+        } else if let tab = base as? UITabBarController {
+            return getTopViewController(base: tab.selectedViewController)
+        } else if let presented = base?.presentedViewController {
+            return getTopViewController(base: presented)
+        }
+        return base
+    }
+
  
     // MARK: - Core Data stack
 
