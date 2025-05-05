@@ -288,7 +288,9 @@ class SettingsViewController: UIViewController {
             let settingView = createSettingView(title: setting.title, description: setting.description)
             stack.addArrangedSubview(settingView)
             
-            if setting.title == "Email Notifications" {
+            if setting.title == "Push Notifications" {
+                settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pushNotificationsTapped)))
+            } else if setting.title == "Email Notifications" {
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emailNotificationsTapped)))
             } else if setting.title == "In-App Notifications" {
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(inAppNotificationsTapped)))
@@ -296,6 +298,11 @@ class SettingsViewController: UIViewController {
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(advertisingIDTapped)))
             }
         }
+    }
+    
+    @objc private func pushNotificationsTapped() {
+        let pushVC = PushNotificationsViewController()
+        navigationController?.pushViewController(pushVC, animated: true)
     }
     
     @objc private func emailNotificationsTapped() {
