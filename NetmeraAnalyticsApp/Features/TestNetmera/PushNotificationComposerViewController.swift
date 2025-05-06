@@ -1,6 +1,27 @@
 import UIKit
 
 class PushNotificationComposerViewController: UIViewController, UITextFieldDelegate {
+    // Sound picker
+    private var soundFiles: [String] = []
+    private var selectedSound: String?
+    
+    private let soundLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sound: None"
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let soundButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Select Sound", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(nil, action: #selector(soundButtonTapped), for: .touchUpInside)
+        return button
+    }()
+
     
     // MARK: - UI Components
     private let titleTextField: UITextField = {
@@ -48,6 +69,28 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
         setupUI()
         setupNavigationBar()
         titleTextField.delegate = self
+        loadSoundFiles()
+    }
+    
+    private func loadSoundFiles() {
+        // Önce Library/Sound altını dene
+        if let urls = Bundle.main.urls(forResourcesWithExtension: "mp3", subdirectory: "Library/Sound") {
+            print("[DEBUG] Library/Sound içindeki mp3 dosyaları:", urls.map { $0.lastPathComponent })
+            if !urls.isEmpty {
+                self.soundFiles = urls.map { $0.lastPathComponent }
+                return
+            }
+        }
+        // Sonra bundle root'u dene
+        if let urls = Bundle.main.urls(forResourcesWithExtension: "mp3", subdirectory: nil) {
+            print("[DEBUG] Bundle root'taki mp3 dosyaları:", urls.map { $0.lastPathComponent })
+            if !urls.isEmpty {
+                self.soundFiles = urls.map { $0.lastPathComponent }
+                return
+            }
+        }
+        print("[DEBUG] mp3 dosyası bulunamadı.")
+        self.soundFiles = []
     }
     
     // MARK: - UI Setup
@@ -65,6 +108,9 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
             titleTextField,
             createLabel("Message"),
             messageTextView,
+            createLabel("Sound"),
+            soundLabel,
+            soundButton,
             sendButton
         ])
         
@@ -126,10 +172,10 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
             return
         }
         
-        sendPushNotification(title: title, message: message)
+        sendPushNotification(title: title, message: message, sound: selectedSound)
     }
     
-    private func sendPushNotification(title: String, message: String) {
+    private func sendPushNotification(title: String, message: String, sound: String?) {
         activityIndicator.startAnimating()
         sendButton.isEnabled = false
         
@@ -139,12 +185,16 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
         request.setValue("N79vhZlSKZCPYboSdLcJClI6d08G4mF2vMqUPR9Uvy8nBPDb_rB_8rQVPEjbkEw7", forHTTPHeaderField: "X-netmera-api-key")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        var messageDict: [String: Any] = [
+            "title": title,
+            "platforms": ["IOS"],
+            "text": message
+        ]
+        if let sound = sound, !sound.isEmpty {
+            messageDict["ios"] = ["sound": sound]
+        }
         let requestBody: [String: Any] = [
-            "message": [
-                "title": title,
-                "platforms": ["IOS"],
-                "text": message
-            ],
+            "message": messageDict,
             "target": [
                 "sendToAll": true
             ]
@@ -182,6 +232,23 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
         }
     }
     
+    // MARK: - Sound Picker
+    @objc private func soundButtonTapped() {
+        let alert = UIAlertController(title: "Select Sound", message: nil, preferredStyle: .actionSheet)
+        for sound in soundFiles {
+            alert.addAction(UIAlertAction(title: sound, style: .default, handler: { [weak self] _ in
+                self?.selectedSound = sound
+                self?.soundLabel.text = "Sound: \(sound)"
+            }))
+        }
+        alert.addAction(UIAlertAction(title: "None", style: .destructive, handler: { [weak self] _ in
+            self?.selectedSound = nil
+            self?.soundLabel.text = "Sound: None"
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+
     private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
