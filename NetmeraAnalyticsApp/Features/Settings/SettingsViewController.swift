@@ -221,7 +221,7 @@ class SettingsViewController: UIViewController {
         addSettingsToStack(appearanceStack, settings: [
             ("theme", NSLocalizedString("theme", comment: ""), NSLocalizedString("light_dark_system", comment: "")),
             ("font_size", NSLocalizedString("font_size", comment: ""), NSLocalizedString("adjust_text_size", comment: "")),
-            ("language", NSLocalizedString("language", comment: ""), displayNameForCurrentLanguage())
+            ("language", NSLocalizedString("language", comment: ""), Locale.current.localizedString(forIdentifier: Locale.current.languageCode ?? "en") ?? "English")
         ])
         
         // Add privacy settings
@@ -347,14 +347,10 @@ class SettingsViewController: UIViewController {
     }
     
     @objc private func languageTapped() {
-        let languageVC = LanguageViewController()
-        if let navController = navigationController {
-            navController.pushViewController(languageVC, animated: true)
-        } else {
-            let navVC = UINavigationController(rootViewController: languageVC)
-            present(navVC, animated: true)
-        }
+    if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+        UIApplication.shared.open(appSettings)
     }
+}
     
     private func createSettingView(title: String, description: String) -> UIView {
         let view = UIView()
@@ -483,14 +479,7 @@ class SettingsViewController: UIViewController {
     }
     
     // MARK: - Language Display Helper
-    private func displayNameForCurrentLanguage() -> String {
-        switch LanguageManager.shared.currentLanguage {
-        case "tr": return "Türkçe"
-        case "en": return "English"
-        case "ar": return "العربية"
-        default: return "English"
-        }
-    }
+    
 
     // MARK: - Actions
     @objc private func locationSettingsTapped() {
