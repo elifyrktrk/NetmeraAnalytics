@@ -1,3 +1,4 @@
+
 import UIKit
 
 class PushNotificationComposerViewController: UIViewController, UITextFieldDelegate {
@@ -5,22 +6,39 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
     private var soundFiles: [String] = []
     private var selectedSound: String?
     
-    private let soundLabel: UILabel = {
+    // Modern sound selection view
+    private let soundSelectionView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .secondarySystemBackground
+        view.layer.cornerRadius = 10
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.systemGray4.cgColor
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    private let soundIconView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "speaker.wave.2.fill")
+        imageView.tintColor = .systemBlue
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    private let soundNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sound: None"
+        label.text = "None"
         label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .darkGray
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    private let soundButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Select Sound", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(nil, action: #selector(soundButtonTapped), for: .touchUpInside)
-        return button
+    private let soundArrowView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "chevron.right")
+        imageView.tintColor = .systemGray2
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
+
 
     
     // MARK: - UI Components
@@ -109,9 +127,28 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
             createLabel("Message"),
             messageTextView,
             createLabel("Sound"),
-            soundLabel,
-            soundButton,
+            soundSelectionView,
             sendButton
+        ])
+        // SoundSelectionView içeriği ve gesture
+        soundSelectionView.addSubview(soundIconView)
+        soundSelectionView.addSubview(soundNameLabel)
+        soundSelectionView.addSubview(soundArrowView)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(soundButtonTapped))
+        soundSelectionView.addGestureRecognizer(tap)
+        NSLayoutConstraint.activate([
+            soundIconView.leadingAnchor.constraint(equalTo: soundSelectionView.leadingAnchor, constant: 12),
+            soundIconView.centerYAnchor.constraint(equalTo: soundSelectionView.centerYAnchor),
+            soundIconView.widthAnchor.constraint(equalToConstant: 24),
+            soundIconView.heightAnchor.constraint(equalToConstant: 24),
+            soundArrowView.trailingAnchor.constraint(equalTo: soundSelectionView.trailingAnchor, constant: -12),
+            soundArrowView.centerYAnchor.constraint(equalTo: soundSelectionView.centerYAnchor),
+            soundArrowView.widthAnchor.constraint(equalToConstant: 16),
+            soundArrowView.heightAnchor.constraint(equalToConstant: 16),
+            soundNameLabel.leadingAnchor.constraint(equalTo: soundIconView.trailingAnchor, constant: 12),
+            soundNameLabel.trailingAnchor.constraint(equalTo: soundArrowView.leadingAnchor, constant: -12),
+            soundNameLabel.centerYAnchor.constraint(equalTo: soundSelectionView.centerYAnchor),
+            soundSelectionView.heightAnchor.constraint(equalToConstant: 44)
         ])
         
         stackView.axis = .vertical
@@ -238,12 +275,12 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
         for sound in soundFiles {
             alert.addAction(UIAlertAction(title: sound, style: .default, handler: { [weak self] _ in
                 self?.selectedSound = sound
-                self?.soundLabel.text = "Sound: \(sound)"
+                self?.soundNameLabel.text = sound
             }))
         }
         alert.addAction(UIAlertAction(title: "None", style: .destructive, handler: { [weak self] _ in
             self?.selectedSound = nil
-            self?.soundLabel.text = "Sound: None"
+            self?.soundNameLabel.text = "None"
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alert, animated: true)
