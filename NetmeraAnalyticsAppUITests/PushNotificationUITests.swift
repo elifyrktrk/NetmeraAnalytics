@@ -41,6 +41,41 @@ class PushNotificationUITests: XCTestCase {
 //        pushAlert.buttons["Tamam"].tap()
 
     }
+    func testPushNotificationWithSoundFlow() {
+        openSideMenu()
+        selectMenuItem(named: "Test Netmera")
+        
+        
+        // Send Push Notification butonuna bas
+        let testPushButton = app.buttons["Test Push Notification"]
+        XCTAssertTrue(testPushButton.waitForExistence(timeout: 5), "Test Push butonu bulunamadı")
+        testPushButton.tap()
+        
+        let soundSelectionView = app.otherElements["SoundPicker"]
+        XCTAssertTrue(soundSelectionView.waitForExistence(timeout: 5), "Sound picker bulunamadı")
+        soundSelectionView.tap()
+
+        let soundButton = app.sheets.buttons["hp.mp3"] // Seçmek istediğin sesi buraya yaz
+        XCTAssertTrue(soundButton.waitForExistence(timeout: 5), "Sound seçimi bulunamadı")
+        soundButton.tap()
+
+        
+        let sendButton = app.buttons["Send Push Notification"]
+        XCTAssertTrue(sendButton.waitForExistence(timeout: 5), "Send Push Notification butonu bulunamadı")
+        sendButton.tap()
+        
+        // Push alert'ini doğrula
+        var pushAlert = app.alerts["Push Geldi"]
+        XCTAssertTrue(pushAlert.waitForExistence(timeout: 10), "Push alert'i çıkmadı")
+    
+    
+       
+     
+    
+     
+
+    }
+    
     
     // MARK: - Yardımcı Metotlar
     

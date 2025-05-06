@@ -134,6 +134,7 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
         soundSelectionView.addSubview(soundIconView)
         soundSelectionView.addSubview(soundNameLabel)
         soundSelectionView.addSubview(soundArrowView)
+        soundSelectionView.accessibilityIdentifier = "SoundPicker"
         let tap = UITapGestureRecognizer(target: self, action: #selector(soundButtonTapped))
         soundSelectionView.addGestureRecognizer(tap)
         NSLayoutConstraint.activate([
