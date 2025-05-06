@@ -1,0 +1,20 @@
+{
+  "_nm": {
+    "act": {
+      "url": "https://ntmtest.netmera-web.com/container/swiftdemo-widget-1_1.html",
+      "at": 2,
+      "fsc": true
+    },
+    "sts": 1672681467376,
+    "pt": 14,
+    "dr": true,
+    "cat": 0,
+    "prms": {},
+    "xid": "mami1234",
+    "pid": "46"
+  },
+  "aps": {
+    "content-available": 1
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

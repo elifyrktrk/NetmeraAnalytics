@@ -1,0 +1,23 @@
+{
+  "_nm": {
+    "cat": 0,
+    "is": false,
+    "ps": {},
+    "pt": 14,
+    "piid": "30002",
+    "sts": 1740592944538,
+    "dr": true,
+    "act": {
+      "url": "https://cloud-test.netmera-web.com/container/netmeraswiftdev-widget-1_0.html",
+      "fsc": true,
+      "at": 2
+    },
+    "pid": "4",
+    "prms": {},
+    "thc": false
+  },
+  "aps": {
+    "content-available": 1
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

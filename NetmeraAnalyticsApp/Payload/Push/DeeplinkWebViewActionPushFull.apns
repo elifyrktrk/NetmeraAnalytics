@@ -1,0 +1,30 @@
+
+{
+  "aps" : {
+    "content-available" : 1,
+    "alert" : {
+      "title" : "test",
+      "subtitle" : "subtitle",
+      "body" : "test [TEST]"
+    },
+    "badge" : 7,
+    "sound" : "Default"
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 2,
+      "url" : "https:\/\/google.com",
+      "fsc" : true
+    },
+    "sts" : 1639497470936,
+    "pt" : 1,
+    "cat" : 0,
+    "prms" : {
+      "key1" : "value1",
+      "key2" : "value2"
+    },
+    "piid" : "2002",
+    "pid" : "9"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

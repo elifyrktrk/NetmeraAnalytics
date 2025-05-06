@@ -1,0 +1,43 @@
+
+{
+  "aps" : {
+    "content-available" : 1,
+    "alert" : {
+      "title" : "asd",
+      "subtitle" : "asd",
+      "body" : "asd [TEST]"
+    },
+    "category" : "1",
+    "badge" : 13
+  },
+  "_nm" : {
+    "act" : {
+      "uri" : "https:\/\/apple.com",
+      "at" : 1
+    },
+    "ia" : [
+      {
+        "prms" : {
+
+        },
+        "id" : "1",
+        "act" : {
+          "uri" : "netmera:\/\/asd?",
+          "at" : 1
+        },
+        "text" : "ButtonName"
+      }
+    ],
+    "sts" : 1639740943904,
+    "dl" : "https:\/\/apple.com",
+    "pt" : 2,
+    "cat" : 0,
+    "prms" : {
+      "key1" : "value1",
+      "key3" : "2"
+    },
+    "piid" : "2008",
+    "pid" : "15"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

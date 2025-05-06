@@ -1,0 +1,10 @@
+{
+  "aps": {
+    "alert": {
+      "title": "Notification Title",
+      "body": "Notifications body"
+    },
+    "mutable-content": 1
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

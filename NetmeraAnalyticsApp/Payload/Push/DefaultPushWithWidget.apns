@@ -1,0 +1,26 @@
+{
+  "aps" : {
+    "alert" : {
+      "title" : "[DefaultPush] Title",
+      "body" : "Test [Widget] action"
+    },
+    "sound" : "Default",
+    "content-available" : 1
+  },
+  "_nm" : {
+    "act" : {
+        "url" : "https:\/\/ntmtest.netmera-web.com\/container\/swiftdemo-widget-1_1.html",
+        "at" : 2,
+        "fsc" : true
+    },
+    "sts" : 1669025290901,
+    "pt" : 1,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "pid" : "38"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}
+

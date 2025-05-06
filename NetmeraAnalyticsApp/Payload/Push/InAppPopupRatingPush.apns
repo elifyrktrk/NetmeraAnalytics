@@ -1,0 +1,21 @@
+
+{
+  "aps" : {
+    "badge" : 15,
+    "content-available" : 1
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 6
+    },
+    "sts" : 1645030301001,
+    "pt" : 12,
+    "dr" : false,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "pid" : "6"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

@@ -1,0 +1,53 @@
+{
+  "aps" : {
+    "content-available" : 1,
+    "alert" : {
+      "title" : "sdf",
+      "subtitle" : "sdf",
+      "body" : "sdfsdf [TEST]"
+    },
+    "mutable-content" : 1,
+    "category" : "4",
+    "badge" : 13
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 0
+    },
+    "ia" : [
+      {
+        "prms" : {
+
+        },
+        "id" : "5",
+        "act" : {
+          "uri" : "netmera://deeplink1",
+          "at" : 1
+        },
+        "text" : "FirstButton"
+      },
+      {
+        "prms" : {
+
+        },
+        "id" : "6",
+        "act" : {
+          "at" : 2,
+          "url" : "https:\/\/google.com",
+          "fsc" : true
+        },
+        "text" : "SecondButton"
+      }
+    ],
+    "sts" : 1639741589738,
+    "mu" : "sdf",
+    "stl" : 1,
+    "pt" : 2,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "pid" : "17"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

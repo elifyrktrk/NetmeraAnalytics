@@ -1,0 +1,24 @@
+{
+  "aps": {
+    "alert": {
+      "title": "Rich Push Title",
+      "subtitle": "sub text",
+      "body": "Rich Push Message [TEST]"
+    },
+    "mutable-content": 1,
+    "content-available": 1
+  },
+  "_nm": {
+    "act": {
+      "at": 0
+    },
+    "sts": 1615908087099,
+    "mu": "https://images.unsplash.com/photo-1615869845861-f7ded891a322?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80",
+    "pt": 1,
+    "stl": 1,
+    "cat": 0,
+    "prms": {},
+    "pid": "13"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

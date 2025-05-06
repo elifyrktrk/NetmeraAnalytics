@@ -1,0 +1,37 @@
+{
+  "_nm" : {
+    "act" : {
+      "at" : 2,
+      "tprms" : {
+        "background_color" : "#ffffff",
+        "BG_COLOR" : "#c5c5c5",
+        "border_color" : "#ffffff",
+        "COC" : "true",
+        "color" : "#576977",
+        "UNLIMITED_CONTENT_URL" : "https:\/\/test.sdpaas.com\/rest\/survey\/get?key=name&mid=33",
+        "FULLSCR" : "true",
+        "CC" : "true",
+        "PLT" : "i",
+        "ea" : "33",
+        "border_radius" : "25",
+        "font_size" : "16"
+      },
+      "tid" : "26",
+      "fsc" : true,
+      "ptl" : 6
+    },
+    "sts" : 1649713261892,
+    "pt" : 3,
+    "dr" : true,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "pid" : "33"
+  },
+  "aps" : {
+    "badge" : 0,
+    "content-available" : 1
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

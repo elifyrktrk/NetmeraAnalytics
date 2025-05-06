@@ -1,0 +1,36 @@
+{
+  "aps" : {
+    "badge" : 13,
+    "content-available" : 1
+  },
+  "_nm": {
+    "pt": 10,
+    "pid": "13481",
+    "sts": 1666786167933,
+    "cat": 0,
+    "xid": "suheda",
+    "dr": true,
+    "act": {
+      "at": 3
+    },
+    "iam": {
+      "tid": 0,
+      "tt": "tttt",
+      "txt": "asloıuytrewqasdfghj",
+      "fsz": 12,
+      "fcl": "#d11616",
+      "bcl": "#155794",
+      "ffm": "default",
+      "brd": 10,
+      "pdt": 40,
+      "pdb": 34,
+      "pdl": 46,
+      "pdr": 33,
+      "omc": true,
+      "drc": 0,
+      "ttl": 6
+    }
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}
+
