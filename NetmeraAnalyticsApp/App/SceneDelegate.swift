@@ -14,6 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        // Kullanıcının seçtiği dili uygula
+        Bundle.setLanguage(LanguageManager.shared.currentLanguage)
+
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
@@ -85,6 +88,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let containerVC = ContainerViewController(mainViewController: navigationController)
         window?.rootViewController = containerVC
         window?.makeKeyAndVisible()
+    }
+
+    // MARK: - Root View Controller Reload For Language Change
+    func reloadRootViewControllerForLanguageChange() {
+        let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
+        if !hasSeenOnboarding {
+            showOnboardingScreen()
+        } else if Auth.auth().currentUser != nil {
+            showDashboardScreen()
+        } else {
+            showLoginScreen()
+        }
     }
 
 }

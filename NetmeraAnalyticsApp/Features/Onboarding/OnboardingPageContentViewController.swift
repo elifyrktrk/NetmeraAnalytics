@@ -55,7 +55,7 @@ class OnboardingPageContentViewController: UIViewController {
     
     lazy var startButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Get Started", for: .normal)
+        button.setTitle(NSLocalizedString("onboarding_get_started", comment: ""), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)

@@ -43,7 +43,7 @@ class SettingsViewController: UIViewController {
     
     private let accountTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Account"
+        label.text = NSLocalizedString("account", comment: "")
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +72,7 @@ class SettingsViewController: UIViewController {
     
     private let notificationsTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Notifications"
+        label.text = NSLocalizedString("notifications", comment: "")
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -101,7 +101,7 @@ class SettingsViewController: UIViewController {
     
     private let appearanceTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Appearance"
+        label.text = NSLocalizedString("appearance", comment: "")
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +130,7 @@ class SettingsViewController: UIViewController {
     
     private let privacyTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Privacy"
+        label.text = NSLocalizedString("privacy", comment: "")
         label.font = .systemFont(ofSize: 18, weight: .bold)
         label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -149,7 +149,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        title = "Settings"
+        title = NSLocalizedString("settings_title", comment: "")
         locationManager.delegate = self // CLLocationManagerDelegate için
     }
     
@@ -200,33 +200,33 @@ class SettingsViewController: UIViewController {
         
         // Add account settings
         addSettingsToStack(accountStack, settings: [
-            ("Profile", "Edit your profile information"),
-            ("Security", "Change password and security settings"),
-            ("Billing", "Manage subscription and billing")
+            ("profile", NSLocalizedString("profile", comment: ""), NSLocalizedString("edit_profile", comment: "")),
+            ("security", NSLocalizedString("security", comment: ""), NSLocalizedString("change_password", comment: "")),
+            ("billing", NSLocalizedString("billing", comment: ""), NSLocalizedString("billing", comment: ""))
         ])
         
         // Add notification settings
         addSettingsToStack(notificationsStack, settings: [
-            ("Push Notifications", "Receive push notifications"),
-            ("Email Notifications", "Receive email notifications"),
-            ("In-App Notifications", "Receive in-app notifications")
+            ("push_notifications", NSLocalizedString("push_notifications", comment: ""), NSLocalizedString("receive_push_notifications", comment: "")),
+            ("email_notifications", NSLocalizedString("email_notifications", comment: ""), NSLocalizedString("receive_email_notifications", comment: "")),
+            ("in_app_notifications", NSLocalizedString("in_app_notifications", comment: ""), NSLocalizedString("receive_in_app_notifications", comment: ""))
         ])
         
         // Add privacy settings
         addSettingsToStack(privacyStack, settings: [
-            ("Advertising ID", "Manage your advertising identifier settings")
+            ("advertising_id", NSLocalizedString("advertising_id", comment: ""), NSLocalizedString("manage_advertising_id", comment: ""))
         ])
         
         // Add appearance settings
         addSettingsToStack(appearanceStack, settings: [
-            ("Theme", "Light / Dark / System"),
-            ("Font Size", "Adjust text size"),
-            ("Language", "English")
+            ("theme", NSLocalizedString("theme", comment: ""), NSLocalizedString("light_dark_system", comment: "")),
+            ("font_size", NSLocalizedString("font_size", comment: ""), NSLocalizedString("adjust_text_size", comment: "")),
+            ("language", NSLocalizedString("language", comment: ""), displayNameForCurrentLanguage())
         ])
         
         // Add privacy settings
         addPrivacySettingsToStack(privacyStack, settings: [
-            ("Location Services", "Allow access to your location", #selector(locationSettingsTapped))
+            (NSLocalizedString("location_services", comment: ""), NSLocalizedString("allow_access_location", comment: ""), #selector(locationSettingsTapped))
         ])
         
         NSLayoutConstraint.activate([
@@ -283,19 +283,24 @@ class SettingsViewController: UIViewController {
         ])
     }
     
-    private func addSettingsToStack(_ stack: UIStackView, settings: [(title: String, description: String)]) {
+    private func addSettingsToStack(_ stack: UIStackView, settings: [(key: String, title: String, description: String)]) {
         for setting in settings {
             let settingView = createSettingView(title: setting.title, description: setting.description)
             stack.addArrangedSubview(settingView)
             
-            if setting.title == "Push Notifications" {
+            switch setting.key {
+            case "push_notifications":
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pushNotificationsTapped)))
-            } else if setting.title == "Email Notifications" {
+            case "email_notifications":
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(emailNotificationsTapped)))
-            } else if setting.title == "In-App Notifications" {
+            case "in_app_notifications":
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(inAppNotificationsTapped)))
-            } else if setting.title == "Advertising ID" {
+            case "advertising_id":
                 settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(advertisingIDTapped)))
+            case "language":
+                settingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(languageTapped)))
+            default:
+                break
             }
         }
     }
@@ -337,6 +342,16 @@ class SettingsViewController: UIViewController {
         } else {
             // If no navigation controller, present modally with navigation
             let navVC = UINavigationController(rootViewController: adIDVC)
+            present(navVC, animated: true)
+        }
+    }
+    
+    @objc private func languageTapped() {
+        let languageVC = LanguageViewController()
+        if let navController = navigationController {
+            navController.pushViewController(languageVC, animated: true)
+        } else {
+            let navVC = UINavigationController(rootViewController: languageVC)
             present(navVC, animated: true)
         }
     }
@@ -450,23 +465,33 @@ class SettingsViewController: UIViewController {
         
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
-            label.text = "Allowed"
+            label.text = NSLocalizedString("allowed", comment: "")
             label.textColor = .systemGreen
         case .denied:
-            label.text = "Denied"
+            label.text = NSLocalizedString("denied", comment: "")
             label.textColor = .systemRed
         case .restricted:
-            label.text = "Restricted"
+            label.text = NSLocalizedString("restricted", comment: "")
             label.textColor = .systemOrange
         case .notDetermined:
-            label.text = "Not Set"
+            label.text = NSLocalizedString("not_set", comment: "")
             label.textColor = .secondaryLabel
         @unknown default:
-            label.text = "Unknown"
+            label.text = NSLocalizedString("unknown", comment: "")
             label.textColor = .secondaryLabel
         }
     }
     
+    // MARK: - Language Display Helper
+    private func displayNameForCurrentLanguage() -> String {
+        switch LanguageManager.shared.currentLanguage {
+        case "tr": return "Türkçe"
+        case "en": return "English"
+        case "ar": return "العربية"
+        default: return "English"
+        }
+    }
+
     // MARK: - Actions
     @objc private func locationSettingsTapped() {
       

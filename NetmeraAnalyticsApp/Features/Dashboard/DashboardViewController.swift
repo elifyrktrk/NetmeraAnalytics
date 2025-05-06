@@ -9,7 +9,7 @@ class DashboardViewController: UIViewController {
     // MARK: - UI Components
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "Try \"Users last week\""
+        searchBar.placeholder = NSLocalizedString("dashboard_search_placeholder", comment: "")
         searchBar.searchBarStyle = .minimal
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
@@ -110,7 +110,7 @@ class DashboardViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         // Configure navigation bar
-        title = "Netmera Analytics"
+        title = NSLocalizedString("dashboard_title", comment: "")
         
         // Add top stack view
         view.addSubview(topStackView)
@@ -168,26 +168,26 @@ class DashboardViewController: UIViewController {
     
     private func configureSections() {
         sections = [
-            DashboardSection(title: "Real-Time Users", items: [
-                .metric(MetricItem(title: "Active Users", value: "1,234", trend: .up(percentage: 5.2))),
-                .metric(MetricItem(title: "Session Duration", value: "12m 30s", trend: .down(percentage: 2.1)))
+            DashboardSection(title: NSLocalizedString("dashboard_realtime_users", comment: ""), items: [
+                .metric(MetricItem(title: NSLocalizedString("dashboard_active_users", comment: ""), value: "1,234", trend: .up(percentage: 5.2))),
+                .metric(MetricItem(title: NSLocalizedString("dashboard_session_duration", comment: ""), value: "12m 30s", trend: .down(percentage: 2.1)))
             ]),
-            DashboardSection(title: "User Activity", items: [
-                .chart(title: "Daily Active Users", data: [65, 72, 86, 93, 85, 103, 98])
+            DashboardSection(title: NSLocalizedString("dashboard_user_activity", comment: ""), items: [
+                .chart(title: NSLocalizedString("dashboard_daily_active_users", comment: ""), data: [65, 72, 86, 93, 85, 103, 98])
             ]),
-            DashboardSection(title: "Event Analytics", items: [
-                .metric(MetricItem(title: "Total Events", value: "45.2K", trend: .up(percentage: 8.7))),
-                .metric(MetricItem(title: "Unique Events", value: "12.8K", trend: .up(percentage: 3.4)))
+            DashboardSection(title: NSLocalizedString("dashboard_event_analytics", comment: ""), items: [
+                .metric(MetricItem(title: NSLocalizedString("dashboard_total_events", comment: ""), value: "45.2K", trend: .up(percentage: 8.7))),
+                .metric(MetricItem(title: NSLocalizedString("dashboard_unique_events", comment: ""), value: "12.8K", trend: .up(percentage: 3.4)))
             ]),
-            DashboardSection(title: "Event Trends", items: [
-                .chart(title: "Events per Hour", data: [42, 38, 35, 30, 45, 55, 60, 48])
+            DashboardSection(title: NSLocalizedString("dashboard_event_trends", comment: ""), items: [
+                .chart(title: NSLocalizedString("dashboard_events_per_hour", comment: ""), data: [42, 38, 35, 30, 45, 55, 60, 48])
             ]),
-            DashboardSection(title: "Push Notifications", items: [
-                .metric(MetricItem(title: "Delivery Rate", value: "98.5%", trend: .up(percentage: 1.2))),
-                .metric(MetricItem(title: "Open Rate", value: "24.3%", trend: .down(percentage: 0.8)))
+            DashboardSection(title: NSLocalizedString("dashboard_push_notifications", comment: ""), items: [
+                .metric(MetricItem(title: NSLocalizedString("dashboard_delivery_rate", comment: ""), value: "98.5%", trend: .up(percentage: 1.2))),
+                .metric(MetricItem(title: NSLocalizedString("dashboard_open_rate", comment: ""), value: "24.3%", trend: .down(percentage: 0.8)))
             ]),
-            DashboardSection(title: "Notification Performance", items: [
-                .chart(title: "Weekly Open Rates", data: [22, 25, 23, 28, 24, 29, 26])
+            DashboardSection(title: NSLocalizedString("dashboard_notification_performance", comment: ""), items: [
+                .chart(title: NSLocalizedString("dashboard_weekly_open_rates", comment: ""), data: [22, 25, 23, 28, 24, 29, 26])
             ])
         ]
         collectionView.reloadData()

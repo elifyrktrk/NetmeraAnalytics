@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController {
     
     private let userIdTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "User ID (required)"
+        textField.placeholder = NSLocalizedString("profile_user_id_required", comment: "")
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.accessibilityIdentifier = "profile_user_id_textfield"
@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
     
     private let nameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Name"
+        textField.placeholder = NSLocalizedString("profile_name", comment: "")
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.accessibilityIdentifier = "profile_name_textfield"
@@ -66,7 +66,7 @@ class ProfileViewController: UIViewController {
     
     private let surnameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Surname"
+        textField.placeholder = NSLocalizedString("profile_surname", comment: "")
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.accessibilityIdentifier = "profile_surname_textfield"
@@ -75,7 +75,7 @@ class ProfileViewController: UIViewController {
     
     private let emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Email"
+        textField.placeholder = NSLocalizedString("profile_email", comment: "")
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -86,7 +86,7 @@ class ProfileViewController: UIViewController {
     
     private let birthDateTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Birth Date"
+        textField.placeholder = NSLocalizedString("profile_birth_date", comment: "")
         textField.borderStyle = .roundedRect
         textField.inputView = UIDatePicker()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -96,7 +96,7 @@ class ProfileViewController: UIViewController {
     
     private let updateButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Update Profile", for: .normal)
+        button.setTitle(NSLocalizedString("profile_update", comment: ""), for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
@@ -116,7 +116,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var logoutButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Logout", for: .normal)
+        button.setTitle(NSLocalizedString("logout", comment: ""), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemRed
         button.layer.cornerRadius = 8
@@ -138,7 +138,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Setup Methods
     private func setupUI() {
         view.backgroundColor = .systemBackground
-        title = "Profile"
+        title = NSLocalizedString("profile", comment: "")
         
         // Add close button to navigation bar
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"),
@@ -226,7 +226,7 @@ class ProfileViewController: UIViewController {
         if let user = Auth.auth().currentUser {
             // Update display labels
            
-            nameLabel.text = user.displayName ?? "User"
+            nameLabel.text = user.displayName ?? NSLocalizedString("profile_user", comment: "")
             emailLabel.text = user.email
             emailTextField.text = user.email // Pre-fill email field
             
@@ -250,12 +250,12 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func logoutTapped() {
-        let alert = UIAlertController(title: "Logout",
-                                    message: "Are you sure you want to logout?",
+        let alert = UIAlertController(title: NSLocalizedString("logout", comment: ""),
+                                    message: NSLocalizedString("logout_confirm", comment: ""),
                                     preferredStyle: .alert)
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { [weak self] _ in
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("logout", comment: ""), style: .destructive) { [weak self] _ in
             do {
                 try Auth.auth().signOut()
                 // Navigate back to login
@@ -272,10 +272,10 @@ class ProfileViewController: UIViewController {
                     })
                 }
             } catch {
-                let errorAlert = UIAlertController(title: "Error",
-                                                 message: "Failed to logout. Please try again.",
+                let errorAlert = UIAlertController(title: NSLocalizedString("error", comment: ""),
+                                                 message: NSLocalizedString("logout_failed", comment: ""),
                                                  preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "OK", style: .default))
+                errorAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default))
                 self?.present(errorAlert, animated: true)
             }
         })
@@ -288,7 +288,7 @@ class ProfileViewController: UIViewController {
         
         guard let userId = userIdTextField.text,
               !userId.isEmpty else {
-            showAlert(title: "Missing Information", message: "User ID is required.")
+            showAlert(title: NSLocalizedString("missing_info", comment: ""), message: NSLocalizedString("user_id_required", comment: ""))
             return
         }
         
@@ -337,7 +337,7 @@ class ProfileViewController: UIViewController {
         }
         
         // Show success message
-        showAlert(title: "Profile Updated", message: "User information sent to Netmera.")
+        showAlert(title: NSLocalizedString("profile_updated", comment: ""), message: NSLocalizedString("profile_info_sent", comment: ""))
         
         // Refresh displayed info
         updateUserInfo()

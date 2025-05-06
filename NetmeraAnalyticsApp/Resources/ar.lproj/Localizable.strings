@@ -1,0 +1,102 @@
+"language_title" = "اختيار اللغة";
+"language_restart_message" = "سيتم إعادة تشغيل التطبيق لتغيير اللغة.";
+"ok" = "موافق";
+
+"settings_title" = "الإعدادات";
+"account" = "الحساب";
+"profile" = "الملف الشخصي";
+"edit_profile" = "تعديل معلومات الملف الشخصي";
+"security" = "الأمان";
+"change_password" = "تغيير كلمة المرور وإعدادات الأمان";
+"billing" = "إدارة الاشتراك والفواتير";
+"notifications" = "الإشعارات";
+"push_notifications" = "إشعارات الدفع";
+"receive_push_notifications" = "تلقي إشعارات الدفع";
+"email_notifications" = "إشعارات البريد الإلكتروني";
+"receive_email_notifications" = "تلقي إشعارات البريد الإلكتروني";
+"in_app_notifications" = "إشعارات داخل التطبيق";
+"receive_in_app_notifications" = "تلقي إشعارات داخل التطبيق";
+"appearance" = "المظهر";
+"theme" = "السمة";
+"font_size" = "حجم الخط";
+"language" = "اللغة";
+"privacy" = "الخصوصية";
+"advertising_id" = "معرف الإعلانات";
+"manage_advertising_id" = "إدارة إعدادات معرف الإعلانات";
+"location_services" = "خدمات الموقع";
+"allow_access_location" = "السماح بالوصول إلى موقعك";
+
+"light_dark_system" = "فاتح / داكن / النظام";
+"adjust_text_size" = "تعديل حجم الخط";
+"allowed" = "مسموح";
+"denied" = "مرفوض";
+"restricted" = "مقيد";
+"not_set" = "غير مضبوط";
+"unknown" = "غير معروف";
+
+"language_turkish" = "التركية";
+"language_english" = "الإنجليزية";
+"language_arabic" = "العربية";
+
+// Login/Register
+"email" = "البريد الإلكتروني";
+"password" = "كلمة المرور";
+"confirm_password" = "تأكيد كلمة المرور";
+"login" = "تسجيل الدخول";
+"register" = "إنشاء حساب";
+"dont_have_account_signup" = "ليس لديك حساب؟ سجل الآن";
+"already_have_account_login" = "هل لديك حساب بالفعل؟ تسجيل الدخول";
+"error" = "خطأ";
+"please_fill_all_fields" = "يرجى ملء جميع الحقول";
+"invalid_password" = "كلمة المرور غير صحيحة. حاول مرة أخرى.";
+"no_account_found" = "لا يوجد حساب بهذا البريد الإلكتروني.";
+"enter_valid_email" = "يرجى إدخال بريد إلكتروني صالح.";
+"generic_error" = "حدث خطأ. حاول مرة أخرى.";
+"login_failed" = "فشل تسجيل الدخول";
+"passwords_do_not_match" = "كلمتا المرور غير متطابقتين";
+"password_minimum_length" = "يجب أن تكون كلمة المرور 6 أحرف على الأقل";
+"account_exists" = "يوجد حساب بهذا البريد الإلكتروني بالفعل.";
+"registration_failed" = "فشل التسجيل. حاول مرة أخرى.";
+"registration_failed_title" = "فشل التسجيل";
+"success" = "نجاح";
+"registration_success" = "تم التسجيل بنجاح! يرجى تسجيل الدخول.";
+
+// Dashboard
+"dashboard_search_placeholder" = "جرب \"المستخدمون الأسبوع الماضي\"";
+"dashboard_title" = "نتيميرا أناليتيكس";
+"dashboard_realtime_users" = "المستخدمون في الوقت الفعلي";
+"dashboard_active_users" = "المستخدمون النشطون";
+"dashboard_session_duration" = "مدة الجلسة";
+"dashboard_user_activity" = "نشاط المستخدم";
+"dashboard_daily_active_users" = "المستخدمون النشطون يوميًا";
+"dashboard_event_analytics" = "تحليلات الأحداث";
+"dashboard_total_events" = "إجمالي الأحداث";
+"dashboard_unique_events" = "الأحداث الفريدة";
+"dashboard_event_trends" = "اتجاهات الأحداث";
+"dashboard_events_per_hour" = "الأحداث في الساعة";
+"dashboard_push_notifications" = "إشعارات الدفع";
+"dashboard_delivery_rate" = "معدل التسليم";
+"dashboard_open_rate" = "معدل الفتح";
+"dashboard_notification_performance" = "أداء الإشعارات";
+"dashboard_weekly_open_rates" = "معدلات الفتح الأسبوعية";
+
+// Onboarding
+"onboarding_get_started" = "ابدأ";
+
+// Profile
+"profile_user_id_required" = "معرّف المستخدم (إلزامي)";
+"profile_name" = "الاسم";
+"profile_surname" = "اللقب";
+"profile_email" = "البريد الإلكتروني";
+"profile_birth_date" = "تاريخ الميلاد";
+"profile_update" = "تحديث الملف الشخصي";
+"logout" = "تسجيل الخروج";
+"profile_user" = "المستخدم";
+"logout_confirm" = "هل أنت متأكد أنك تريد تسجيل الخروج؟";
+"cancel" = "إلغاء";
+"profile_updated" = "تم تحديث الملف الشخصي";
+"profile_info_sent" = "تم إرسال معلومات المستخدم إلى نتيميرا.";
+"error" = "خطأ";
+"logout_failed" = "فشل تسجيل الخروج. حاول مرة أخرى.";
+"missing_info" = "معلومات ناقصة";
+"user_id_required" = "معرّف المستخدم إلزامي.";

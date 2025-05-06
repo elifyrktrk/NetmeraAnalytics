@@ -13,7 +13,7 @@ class RegisterViewController: UIViewController {
     // MARK: - UI Components
     private let emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Email"
+        textField.placeholder = NSLocalizedString("email", comment: "")
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -23,7 +23,7 @@ class RegisterViewController: UIViewController {
     
     private let passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Password"
+        textField.placeholder = NSLocalizedString("password", comment: "")
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +32,7 @@ class RegisterViewController: UIViewController {
     
     private let confirmPasswordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Confirm Password"
+        textField.placeholder = NSLocalizedString("confirm_password", comment: "")
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -41,7 +41,7 @@ class RegisterViewController: UIViewController {
     
     private let registerButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Register", for: .normal)
+        button.setTitle(NSLocalizedString("register", comment: ""), for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
@@ -58,7 +58,7 @@ class RegisterViewController: UIViewController {
     
     private let loginLabel: UILabel = {
         let label = UILabel()
-        label.text = "Already have an account? Login"
+        label.text = NSLocalizedString("already_have_account_login", comment: "")
         label.textColor = .systemBlue
         label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +75,7 @@ class RegisterViewController: UIViewController {
     // MARK: - Setup Methods
     private func setupUI() {
         view.backgroundColor = .white
-        title = "Register"
+        title = NSLocalizedString("register", comment: "")
         
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
@@ -127,19 +127,19 @@ class RegisterViewController: UIViewController {
               let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               let confirmPassword = confirmPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               !email.isEmpty, !password.isEmpty, !confirmPassword.isEmpty else {
-            showAlert(title: "Error", message: "Please fill in all fields")
+            showAlert(title: NSLocalizedString("error", comment: ""), message: NSLocalizedString("please_fill_all_fields", comment: ""))
             return
         }
         
         // Validate password match
         guard password == confirmPassword else {
-            showAlert(title: "Error", message: "Passwords do not match")
+            showAlert(title: NSLocalizedString("error", comment: ""), message: NSLocalizedString("passwords_do_not_match", comment: ""))
             return
         }
         
         // Validate password length
         guard password.count >= 6 else {
-            showAlert(title: "Error", message: "Password must be at least 6 characters long")
+            showAlert(title: NSLocalizedString("error", comment: ""), message: NSLocalizedString("password_minimum_length", comment: ""))
             return
         }
         
@@ -158,20 +158,20 @@ class RegisterViewController: UIViewController {
                 let errorMessage: String
                 switch error.localizedDescription {
                 case "The email address is badly formatted.":
-                    errorMessage = "Please enter a valid email address."
+                    errorMessage = NSLocalizedString("enter_valid_email", comment: "")
                 case "The email address is already in use by another account.":
-                    errorMessage = "An account with this email already exists."
+                    errorMessage = NSLocalizedString("account_exists", comment: "")
                 case "The password must be 6 characters long or more.":
-                    errorMessage = "Password must be at least 6 characters long."
+                    errorMessage = NSLocalizedString("password_minimum_length", comment: "")
                 default:
-                    errorMessage = "Registration failed. Please try again."
+                    errorMessage = NSLocalizedString("registration_failed", comment: "")
                 }
-                self.showAlert(title: "Registration Failed", message: errorMessage)
+                self.showAlert(title: NSLocalizedString("registration_failed_title", comment: ""), message: errorMessage)
                 return
             }
             
             // Registration successful
-            self.showAlert(title: "Success", message: "Registration successful! Please log in.") { [weak self] _ in
+            self.showAlert(title: NSLocalizedString("success", comment: ""), message: NSLocalizedString("registration_success", comment: "")) { [weak self] _ in
                 self?.dismiss(animated: true)
             }
         }
@@ -188,14 +188,14 @@ class RegisterViewController: UIViewController {
             registerButton.setTitle("", for: .normal)
             activityIndicator.startAnimating()
         } else {
-            registerButton.setTitle("Register", for: .normal)
+            registerButton.setTitle(NSLocalizedString("register", comment: ""), for: .normal)
             activityIndicator.stopAnimating()
         }
     }
     
     private func showAlert(title: String, message: String, completion: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: completion))
         present(alert, animated: true)
     }
 }

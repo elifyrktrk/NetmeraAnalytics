@@ -13,7 +13,7 @@ class LoginViewController: UIViewController {
     // MARK: - UI Components (Programmatic)
     private let emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Email"
+        textField.placeholder = NSLocalizedString("email", comment: "")
         textField.borderStyle = .roundedRect
         textField.keyboardType = .emailAddress
         textField.autocapitalizationType = .none
@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
     
     private let passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Password"
+        textField.placeholder = NSLocalizedString("password", comment: "")
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +32,7 @@ class LoginViewController: UIViewController {
     
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Login", for: .normal)
+        button.setTitle(NSLocalizedString("login", comment: ""), for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
@@ -49,7 +49,7 @@ class LoginViewController: UIViewController {
     
     private let registerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Don't have an account? Sign Up"
+        label.text = NSLocalizedString("dont_have_account_signup", comment: "")
         label.textColor = .systemBlue
         label.isUserInteractionEnabled = true
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +65,7 @@ class LoginViewController: UIViewController {
 
     // MARK: - Setup Methods
     private func setupUI() {
-        title = "Login"
+        title = NSLocalizedString("login", comment: "")
         view.backgroundColor = .white
         
         view.addSubview(emailTextField)
@@ -111,7 +111,7 @@ class LoginViewController: UIViewController {
         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
               !email.isEmpty, !password.isEmpty else {
-            showAlert(title: "Error", message: "Please fill in all fields")
+            showAlert(title: NSLocalizedString("error", comment: ""), message: NSLocalizedString("please_fill_all_fields", comment: ""))
             return
         }
         
@@ -130,15 +130,15 @@ class LoginViewController: UIViewController {
                 let errorMessage: String
                 switch error.localizedDescription {
                 case "The password is invalid or the user does not have a password.":
-                    errorMessage = "Invalid password. Please try again."
+                    errorMessage = NSLocalizedString("invalid_password", comment: "")
                 case "There is no user record corresponding to this identifier. The user may have been deleted.":
-                    errorMessage = "No account found with this email."
+                    errorMessage = NSLocalizedString("no_account_found", comment: "")
                 case "The email address is badly formatted.":
-                    errorMessage = "Please enter a valid email address."
+                    errorMessage = NSLocalizedString("enter_valid_email", comment: "")
                 default:
-                    errorMessage = "An error occurred. Please try again."
+                    errorMessage = NSLocalizedString("generic_error", comment: "")
                 }
-                self.showAlert(title: "Login Failed", message: errorMessage)
+                self.showAlert(title: NSLocalizedString("login_failed", comment: ""), message: errorMessage)
                 return
             }
             
@@ -160,14 +160,14 @@ class LoginViewController: UIViewController {
             loginButton.setTitle("", for: .normal)
             activityIndicator.startAnimating()
         } else {
-            loginButton.setTitle("Login", for: .normal)
+            loginButton.setTitle(NSLocalizedString("login", comment: ""), for: .normal)
             activityIndicator.stopAnimating()
         }
     }
     
     private func showAlert(title: String, message: String, completion: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: completion))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: completion))
         present(alert, animated: true)
     }
     

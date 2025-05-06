@@ -1,0 +1,102 @@
+"language_title" = "Language Selection";
+"language_restart_message" = "The app will restart to apply the language change.";
+"ok" = "OK";
+
+"settings_title" = "Settings";
+"account" = "Account";
+"profile" = "Profile";
+"edit_profile" = "Edit your profile information";
+"security" = "Security";
+"change_password" = "Change password and security settings";
+"billing" = "Manage subscription and billing";
+"notifications" = "Notifications";
+"push_notifications" = "Push Notifications";
+"receive_push_notifications" = "Receive push notifications";
+"email_notifications" = "Email Notifications";
+"receive_email_notifications" = "Receive email notifications";
+"in_app_notifications" = "In-App Notifications";
+"receive_in_app_notifications" = "Receive in-app notifications";
+"appearance" = "Appearance";
+"theme" = "Theme";
+"font_size" = "Font Size";
+"language" = "Language";
+"privacy" = "Privacy";
+"advertising_id" = "Advertising ID";
+"manage_advertising_id" = "Manage your advertising identifier settings";
+"location_services" = "Location Services";
+"allow_access_location" = "Allow access to your location";
+
+"light_dark_system" = "Light / Dark / System";
+"adjust_text_size" = "Adjust text size";
+"allowed" = "Allowed";
+"denied" = "Denied";
+"restricted" = "Restricted";
+"not_set" = "Not Set";
+"unknown" = "Unknown";
+
+"language_turkish" = "Turkish";
+"language_english" = "English";
+"language_arabic" = "Arabic";
+
+// Login/Register
+"email" = "Email";
+"password" = "Password";
+"confirm_password" = "Confirm Password";
+"login" = "Login";
+"register" = "Register";
+"dont_have_account_signup" = "Don't have an account? Sign Up";
+"already_have_account_login" = "Already have an account? Login";
+"error" = "Error";
+"please_fill_all_fields" = "Please fill in all fields";
+"invalid_password" = "Invalid password. Please try again.";
+"no_account_found" = "No account found with this email.";
+"enter_valid_email" = "Please enter a valid email address.";
+"generic_error" = "An error occurred. Please try again.";
+"login_failed" = "Login Failed";
+"passwords_do_not_match" = "Passwords do not match";
+"password_minimum_length" = "Password must be at least 6 characters long";
+"account_exists" = "An account with this email already exists.";
+"registration_failed" = "Registration failed. Please try again.";
+"registration_failed_title" = "Registration Failed";
+"success" = "Success";
+"registration_success" = "Registration successful! Please log in.";
+
+// Dashboard
+"dashboard_search_placeholder" = "Try \"Users last week\"";
+"dashboard_title" = "Netmera Analytics";
+"dashboard_realtime_users" = "Real-Time Users";
+"dashboard_active_users" = "Active Users";
+"dashboard_session_duration" = "Session Duration";
+"dashboard_user_activity" = "User Activity";
+"dashboard_daily_active_users" = "Daily Active Users";
+"dashboard_event_analytics" = "Event Analytics";
+"dashboard_total_events" = "Total Events";
+"dashboard_unique_events" = "Unique Events";
+"dashboard_event_trends" = "Event Trends";
+"dashboard_events_per_hour" = "Events per Hour";
+"dashboard_push_notifications" = "Push Notifications";
+"dashboard_delivery_rate" = "Delivery Rate";
+"dashboard_open_rate" = "Open Rate";
+"dashboard_notification_performance" = "Notification Performance";
+"dashboard_weekly_open_rates" = "Weekly Open Rates";
+
+// Onboarding
+"onboarding_get_started" = "Get Started";
+
+// Profile
+"profile_user_id_required" = "User ID (required)";
+"profile_name" = "Name";
+"profile_surname" = "Surname";
+"profile_email" = "Email";
+"profile_birth_date" = "Birth Date";
+"profile_update" = "Update Profile";
+"logout" = "Logout";
+"profile_user" = "User";
+"logout_confirm" = "Are you sure you want to logout?";
+"cancel" = "Cancel";
+"profile_updated" = "Profile Updated";
+"profile_info_sent" = "User information sent to Netmera.";
+"error" = "Error";
+"logout_failed" = "Failed to logout. Please try again.";
+"missing_info" = "Missing Information";
+"user_id_required" = "User ID is required.";

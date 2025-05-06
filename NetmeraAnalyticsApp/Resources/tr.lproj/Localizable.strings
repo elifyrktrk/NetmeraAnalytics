@@ -1,0 +1,102 @@
+"language_title" = "Dil Seçimi";
+"language_restart_message" = "Dil değişikliği için uygulama yeniden başlatılacak.";
+"ok" = "Tamam";
+
+"settings_title" = "Ayarlar";
+"account" = "Hesap";
+"profile" = "Profil";
+"edit_profile" = "Profil Bilgilerini Düzenle";
+"security" = "Güvenlik";
+"change_password" = "Şifre ve güvenlik ayarlarını değiştir";
+"billing" = "Abonelik ve fatura yönetimi";
+"notifications" = "Bildirimler";
+"push_notifications" = "Push Bildirimleri";
+"receive_push_notifications" = "Push bildirimleri al";
+"email_notifications" = "E-posta Bildirimleri";
+"receive_email_notifications" = "E-posta ile bildirim al";
+"in_app_notifications" = "Uygulama İçi Bildirimler";
+"receive_in_app_notifications" = "Uygulama içi bildirim al";
+"appearance" = "Görünüm";
+"theme" = "Tema";
+"font_size" = "Yazı Boyutu";
+"language" = "Dil";
+"privacy" = "Gizlilik";
+"advertising_id" = "Reklam Kimliği";
+"manage_advertising_id" = "Reklam kimliği ayarlarını yönet";
+"location_services" = "Konum Servisleri";
+"allow_access_location" = "Konumunuza erişime izin ver";
+
+"light_dark_system" = "Açık / Koyu / Sistem";
+"adjust_text_size" = "Yazı boyutunu ayarla";
+"allowed" = "İzin Verildi";
+"denied" = "Reddedildi";
+"restricted" = "Kısıtlı";
+"not_set" = "Ayarlanmadı";
+"unknown" = "Bilinmiyor";
+
+"language_turkish" = "Türkçe";
+"language_english" = "İngilizce";
+"language_arabic" = "Arapça";
+
+// Login/Register
+"email" = "E-posta";
+"password" = "Şifre";
+"confirm_password" = "Şifreyi Onayla";
+"login" = "Giriş Yap";
+"register" = "Kayıt Ol";
+"dont_have_account_signup" = "Hesabın yok mu? Kayıt Ol";
+"already_have_account_login" = "Zaten hesabın var mı? Giriş Yap";
+"error" = "Hata";
+"please_fill_all_fields" = "Lütfen tüm alanları doldurun";
+"invalid_password" = "Geçersiz şifre. Lütfen tekrar deneyin.";
+"no_account_found" = "Bu e-posta ile kayıtlı bir hesap bulunamadı.";
+"enter_valid_email" = "Lütfen geçerli bir e-posta adresi girin.";
+"generic_error" = "Bir hata oluştu. Lütfen tekrar deneyin.";
+"login_failed" = "Giriş Başarısız";
+"passwords_do_not_match" = "Şifreler eşleşmiyor";
+"password_minimum_length" = "Şifre en az 6 karakter olmalı";
+"account_exists" = "Bu e-posta ile kayıtlı bir hesap zaten var.";
+"registration_failed" = "Kayıt başarısız. Lütfen tekrar deneyin.";
+"registration_failed_title" = "Kayıt Başarısız";
+"success" = "Başarılı";
+"registration_success" = "Kayıt başarılı! Lütfen giriş yapın.";
+
+// Dashboard
+"dashboard_search_placeholder" = "Örneğin: \"Geçen hafta kullanıcılar\"";
+"dashboard_title" = "Netmera Analytics";
+"dashboard_realtime_users" = "Gerçek Zamanlı Kullanıcılar";
+"dashboard_active_users" = "Aktif Kullanıcılar";
+"dashboard_session_duration" = "Oturum Süresi";
+"dashboard_user_activity" = "Kullanıcı Aktivitesi";
+"dashboard_daily_active_users" = "Günlük Aktif Kullanıcılar";
+"dashboard_event_analytics" = "Etkinlik Analitiği";
+"dashboard_total_events" = "Toplam Etkinlik";
+"dashboard_unique_events" = "Benzersiz Etkinlik";
+"dashboard_event_trends" = "Etkinlik Trendleri";
+"dashboard_events_per_hour" = "Saatlik Etkinlikler";
+"dashboard_push_notifications" = "Push Bildirimleri";
+"dashboard_delivery_rate" = "Teslimat Oranı";
+"dashboard_open_rate" = "Açılma Oranı";
+"dashboard_notification_performance" = "Bildirim Performansı";
+"dashboard_weekly_open_rates" = "Haftalık Açılma Oranları";
+
+// Onboarding
+"onboarding_get_started" = "Başla";
+
+// Profile
+"profile_user_id_required" = "Kullanıcı ID (zorunlu)";
+"profile_name" = "Ad";
+"profile_surname" = "Soyad";
+"profile_email" = "E-posta";
+"profile_birth_date" = "Doğum Tarihi";
+"profile_update" = "Profili Güncelle";
+"logout" = "Çıkış Yap";
+"profile_user" = "Kullanıcı";
+"logout_confirm" = "Çıkış yapmak istediğinize emin misiniz?";
+"cancel" = "İptal";
+"profile_updated" = "Profil Güncellendi";
+"profile_info_sent" = "Kullanıcı bilgileri Netmera'ya gönderildi.";
+"error" = "Hata";
+"logout_failed" = "Çıkış yapılamadı. Lütfen tekrar deneyin.";
+"missing_info" = "Eksik Bilgi";
+"user_id_required" = "Kullanıcı ID zorunludur.";
