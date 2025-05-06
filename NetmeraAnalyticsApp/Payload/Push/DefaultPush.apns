@@ -1,0 +1,23 @@
+{
+  "aps" : {
+    "badge" : 5,
+    "alert" : {
+      "title" : "[DefaultPush] Title",
+      "body" : "Test [OpenApp] action"
+    },
+    "content-available" : 1
+  },
+  "_nm" : {
+    "cat" : 0,
+    "sts" : 1639496901795,
+    "prms" : {
+
+    },
+    "act" : {
+      "at" : 0
+    },
+    "pt" : 1,
+    "pid" : "9"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

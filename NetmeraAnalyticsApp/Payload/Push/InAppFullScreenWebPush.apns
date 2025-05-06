@@ -1,0 +1,22 @@
+{
+  "aps" : {
+    "badge" : 15,
+    "content-available" : 1
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 2,
+      "url" : "https:\/\/www.google.com.tr\/?hl=tr",
+      "fsc" : true
+    },
+    "sts" : 1644956293189,
+    "pt" : 3,
+    "dr" : true,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "pid" : "6"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

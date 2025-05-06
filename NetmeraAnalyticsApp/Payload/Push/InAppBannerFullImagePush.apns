@@ -1,0 +1,39 @@
+
+{
+  "aps" : {
+    "badge" : 15,
+    "content-available" : 1
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 2,
+      "url" : "https:\/\/www.google.com.tr\/?hl=tr",
+      "fsc" : false
+    },
+    "sts" : 1644960509761,
+    "iam" : {
+      "ffm" : "default",
+      "pdl" : 4,
+      "pdb" : 4,
+      "brd" : 10,
+      "pdt" : 10,
+      "ttl" : 20,
+      "drc" : 0,
+      "img" : "https:\/\/images.unsplash.com\/photo-1644915573765-c35a1ee88bf0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyM3x8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+      "fsz" : 19,
+      "pdr" : 4,
+      "omc" : true,
+      "tid" : 2,
+      "bcl" : "#3ad2a7",
+      "fcl" : "#c32a2a"
+    },
+    "pt" : 10,
+    "dr" : true,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "pid" : "6"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

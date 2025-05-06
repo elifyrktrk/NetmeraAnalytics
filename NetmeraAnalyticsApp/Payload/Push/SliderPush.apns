@@ -1,0 +1,57 @@
+{
+  "_nm" : {
+    "act" : {
+      "at" : 0
+    },
+    "pid" : "30",
+    "sts" : 1650293614476,
+    "stl" : 3,
+    "pt" : 1,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "crsl" : [
+      {
+        "id" : "0",
+        "ctitle" : null,
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1627914551740-f0d01b81dbb8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxODd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
+        "act" : {
+          "at" : 0
+        },
+        "ctext" : null
+      },
+      {
+        "id" : "1",
+        "ctitle" : null,
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1648737967037-96967e9151b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxOTF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
+        "act" : {
+          "url" : "https:\/\/images.unsplash.com\/photo-1648737967037-96967e9151b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxOTF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
+          "at" : 2,
+          "fsc" : false
+        },
+        "ctext" : null
+      },
+      {
+        "id" : "2",
+        "ctitle" : null,
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1649438032416-25a260c7a486?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNjB8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60",
+        "act" : {
+          "uri" : "netmera:\/\/sup",
+          "at" : 1
+        },
+        "ctext" : null
+      }
+    ]
+  },
+  "aps" : {
+    "content-available" : 1,
+    "alert" : {
+      "title" : "[SliderPush] Title",
+      "body" : "Test [Deeplink, WebView, OpenApp] action"
+    },
+    "category" : "NetmeraCarousel",
+    "badge" : 0
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

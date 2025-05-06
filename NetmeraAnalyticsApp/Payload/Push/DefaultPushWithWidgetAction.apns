@@ -1,0 +1,29 @@
+{
+  "aps" : {
+    "alert" : {
+      "body" : "asdjnajsnd [TEST]"
+    },
+    "sound" : "Default",
+    "content-available" : 1
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 7,
+      "url" : "https:\/\/cloud-test.netmera-web.com\/container\/netmeratest-widget-115_2.html",
+      "fsc" : true
+    },
+    "ps" : {
+
+    },
+    "sts" : 1739380167258,
+    "thc" : false,
+    "pt" : 1,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "xid" : "mami123",
+    "pid" : "3119"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

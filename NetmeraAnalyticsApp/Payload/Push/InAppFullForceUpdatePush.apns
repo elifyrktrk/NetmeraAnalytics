@@ -1,0 +1,36 @@
+{
+  "aps" : {
+    "badge" : 15,
+    "content-available" : 1
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 2,
+      "tprms" : {
+        "BTN_1_ACT" : "DL",
+        "CARD_TEXT" : "You have to update your app",
+        "NAV_IMG" : "https:\/\/images.unsplash.com\/photo-1645116094099-17691f279a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+        "CARD_TITLE" : "New Update!",
+        "BTN_1_URL" : "https:\/\/www.google.com.tr\/?hl=tr",
+        "BTN_1" : "Update App",
+        "COC" : "false",
+        "FULLSCR" : "true",
+        "CC" : "false",
+        "PLT" : "i",
+        "ea" : "21",
+        "CARD_BG_COLOR" : "#ffffff"
+      },
+      "tid" : "34",
+      "fsc" : true
+    },
+    "sts" : 1645128157308,
+    "pt" : 13,
+    "dr" : true,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "pid" : "21"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

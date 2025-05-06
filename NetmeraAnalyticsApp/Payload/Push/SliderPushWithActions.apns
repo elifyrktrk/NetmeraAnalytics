@@ -1,0 +1,62 @@
+{
+  "aps" : {
+    "content-available" : 1,
+    "alert" : {
+      "title" : "[SliderPush] Title",
+      "body" : "Test [Deeplink, WebView, OpenApp] action"
+    },
+    "mutable-content" : 1,
+    "category" : "NetmeraCarousel",
+    "sound" : "Default"
+  },
+  "_nm" : {
+    "act" : {
+      "uri" : "netmera:\/\/defaultDeeplink?key=value",
+      "at" : 1
+    },
+    "pid" : "20",
+    "sts" : 1672153685808,
+    "mu" : "https:\/\/images.unsplash.com\/photo-1672076292491-28ef139f5e5f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OXx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60",
+    "stl" : 3,
+    "pt" : 1,
+    "dl" : "netmera:\/\/pushDeeplink?key=value",
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "xid" : "mami4545",
+    "crsl" : [
+      {
+        "id" : "0",
+        "ctitle" : null,
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1672135483622-c5e769736c8b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60",
+        "act" : {
+          "uri" : "netmera:\/\/deeplink?key=value",
+          "at" : 1
+        },
+        "ctext" : null
+      },
+      {
+        "id" : "1",
+        "ctitle" : null,
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1664575196412-ed801e8333a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxNnx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60",
+        "act" : {
+          "url" : "https:\/\/apple.com",
+          "at" : 2,
+          "fsc" : false
+        },
+        "ctext" : null
+      },
+      {
+        "id" : "2",
+        "ctitle" : null,
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1665686376173-ada7a0031a85?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw1MHx8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60",
+        "act" : {
+          "at" : 0
+        },
+        "ctext" : null
+      }
+    ]
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

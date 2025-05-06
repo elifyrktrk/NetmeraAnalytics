@@ -1,0 +1,28 @@
+
+{
+  "aps" : {
+    "alert" : {
+      "title" : "asd",
+      "subtitle" : "asd",
+      "body" : "asd [TEST]"
+    },
+    "badge" : 8,
+    "content-available" : 1
+  },
+  "_nm" : {
+    "act" : {
+      "uri" : "netmera:\/\/test?key=13",
+      "at" : 1
+    },
+    "dl" : "netmera:\/\/test?key=13",
+    "sts" : 1639738721381,
+    "pt" : 1,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "piid" : "2003",
+    "pid" : "15"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

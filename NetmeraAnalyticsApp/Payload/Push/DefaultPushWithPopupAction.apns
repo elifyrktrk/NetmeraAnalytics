@@ -1,0 +1,38 @@
+{
+  "_nm" : {
+    "cat" : 0,
+    "sts" : 1667816950698,
+    "prms" : {
+
+    },
+    "act" : {
+      "at" : 2,
+      "tprms" : {
+        "BG_IMG" : "https:\/\/d1ww2j6vr8znxs.cloudfront.net\/img\/default-template-image.jpg",
+        "COC" : "false",
+        "ea" : "14",
+        "FULLSCR" : "false",
+        "BTN_CC_COLOR" : "#ffffff",
+        "CC" : "false",
+        "BTN_1_COLOR" : "#0069d9",
+        "PLT" : "i",
+        "CARD_TEXT" : "",
+        "BTN_1" : "Button 1",
+        "BTN_1_OUTLINE_COLOR" : "#0062cc"
+      },
+      "tid" : "15",
+      "fsc" : false
+    },
+    "pt" : 1,
+    "pid" : "14"
+  },
+  "aps" : {
+    "alert" : {
+      "title" : "[DefaultPush] Title",
+      "body" : "Test [OpenWebView TemplatePopup] action"
+    },
+    "sound" : "Default",
+    "content-available" : 1
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

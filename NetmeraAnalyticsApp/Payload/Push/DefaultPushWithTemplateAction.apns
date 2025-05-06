@@ -1,0 +1,42 @@
+{
+  "aps" : {
+    "alert" : {
+      "title" : "asd",
+      "subtitle" : "asd",
+      "body" : "asd [TEST]"
+    },
+    "badge" : 8,
+    "content-available" : 1
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 2,
+      "tprms" : {
+        "BG_IMG" : "https:\/\/d1ww2j6vr8znxs.cloudfront.net\/img\/default-template-image.jpg",
+        "COC" : "true",
+        "ea" : "32",
+        "FULLSCR" : "true",
+        "BTN_CC_COLOR" : "#ffffff",
+        "CC" : "true",
+        "BTN_1_COLOR" : "#0069d9",
+        "PLT" : "i",
+        "CARD_TEXT" : "",
+        "BTN_1" : "Button 1",
+        "BTN_1_OUTLINE_COLOR" : "#0062cc"
+      },
+      "tid" : "15",
+      "fsc" : true,
+      "ptl" : 6
+    },
+    "dl" : "netmera:\/\/test?key=13",
+    "sts" : 1639738721381,
+    "pt" : 1,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "piid" : "2003",
+    "pid" : "15"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

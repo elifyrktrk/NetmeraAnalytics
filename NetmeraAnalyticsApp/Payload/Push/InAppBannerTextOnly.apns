@@ -1,0 +1,42 @@
+{
+  "_nm" : {
+    "act" : {
+      "uri" : "https:\/\/google.com",
+      "at" : 1
+    },
+    "cta" : [
+
+    ],
+    "iam" : {
+      "ffm" : "default",
+      "tt" : "asdasd",
+      "pdl" : "10",
+      "pdb" : "10",
+      "brd" : "10",
+      "pdt" : "10",
+      "ttl" : 30,
+      "drc" : 0,
+      "omc" : true,
+      "pdr" : "10",
+      "fsz" : "20",
+      "txt" : "asdasdasd",
+      "tid" : 0,
+      "bcl" : "#990c0c",
+      "fcl" : "#d61919"
+    },
+    "sts" : 1649713439148,
+    "pt" : 10,
+    "dr" : true,
+    "dl" : "https:\/\/google.com",
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "pid" : "21"
+  },
+  "aps" : {
+    "badge" : 0,
+    "content-available" : 1
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

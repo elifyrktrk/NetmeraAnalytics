@@ -1,0 +1,25 @@
+{
+  "aps" : {
+    "alert" : {
+      "title" : "[DefaultPush] Title",
+      "body" : "Test [OpenWebView URL] action"
+    },
+    "sound" : "Default",
+    "content-available" : 1
+  },
+  "_nm" : {
+    "cat" : 0,
+    "sts" : 1667816886606,
+    "prms" : {
+
+    },
+    "act" : {
+      "url" : "http:\/\/apple.com",
+      "at" : 2,
+      "fsc" : false
+    },
+    "pt" : 1,
+    "pid" : "14"
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}

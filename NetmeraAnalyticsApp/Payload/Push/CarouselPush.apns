@@ -1,0 +1,76 @@
+{
+  "aps" : {
+    "content-available" : 1,
+    "alert" : {
+      "title" : "deneme",
+      "subtitle" : "deneme",
+      "body" : "deneme [TEST]"
+    },
+    "category" : "NetmeraCarousel",
+    "badge" : 15
+  },
+  "_nm" : {
+    "act" : {
+      "at" : 0
+    },
+    "pid" : "13",
+    "sts" : 1645458338250,
+    "stl" : 2,
+    "pt" : 1,
+    "cat" : 0,
+    "prms" : {
+
+    },
+    "crsl" : [
+      {
+        "id" : "0",
+        "ctitle" : "webPage",
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1638348196145-77a59170f602?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+        "act" : {
+          "url" : "https:\/\/www.google.com.tr\/",
+          "at" : 2,
+          "fsc" : false
+        },
+        "ctext" : "111"
+      },
+      {
+        "id" : "1",
+        "ctitle" : "Deeplink",
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1638344435939-b2d44c8ea302?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+        "act" : {
+          "uri" : "netmera:\/\/deeplink?mock_key=mock_value",
+          "at" : 1
+        },
+        "ctext" : "44"
+      },
+      {
+        "id" : "2",
+        "ctitle" : "OpenApp",
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1638308848598-34f03f21c03b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+        "act" : {
+          "at" : 0
+        },
+        "ctext" : "222"
+      },
+      {
+        "id" : "3",
+        "ctitle" : "4",
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1638308848598-34f03f21c03b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+        "act" : {
+          "at" : 0
+        },
+        "ctext" : "4"
+      },
+      {
+        "id" : "4",
+        "ctitle" : "asdasdasd",
+        "bpp" : "https:\/\/images.unsplash.com\/photo-1638308848598-34f03f21c03b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+        "act" : {
+          "at" : 0
+        },
+        "ctext" : "asdasdasd"
+      }
+    ]
+  },
+  "Simulator Target Bundle": "netmera.NetmeraAnalyticsApp"
+}
