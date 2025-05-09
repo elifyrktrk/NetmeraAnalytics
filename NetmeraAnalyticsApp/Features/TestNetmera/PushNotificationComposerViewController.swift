@@ -65,12 +65,23 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
     
     private let sendButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Send Push Notification", for: .normal)
+        button.setTitle("Send Push Notification with Netmera ", for: .normal)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    private let sendPayloadButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Send Notification with Payload", for: .normal)
+        button.backgroundColor = .systemGreen
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(sendPayloadButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -128,7 +139,8 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
             messageTextView,
             createLabel("Sound"),
             soundSelectionView,
-            sendButton
+            sendButton,
+            sendPayloadButton
         ])
         // SoundSelectionView içeriği ve gesture
         soundSelectionView.addSubview(soundIconView)
@@ -213,6 +225,10 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
         sendPushNotification(title: title, message: message, sound: selectedSound)
     }
     
+    @objc private func sendPayloadButtonTapped() {
+        sendPayloadPushNotification()
+    }
+    
     private func sendPushNotification(title: String, message: String, sound: String?) {
         activityIndicator.startAnimating()
         sendButton.isEnabled = false
@@ -266,6 +282,64 @@ class PushNotificationComposerViewController: UIViewController, UITextFieldDeleg
         } catch {
             activityIndicator.stopAnimating()
             sendButton.isEnabled = true
+            showAlert(title: "Error", message: "Failed to create request: \(error.localizedDescription)")
+        }
+    }
+    
+    private func sendPayloadPushNotification() {
+        activityIndicator.startAnimating()
+        sendPayloadButton.isEnabled = false
+        
+        guard let payloadPath = Bundle.main.path(forResource: "BasicAlertPush", ofType: "apns", inDirectory: "Payload/Push") else {
+            showAlert(title: "Error", message: "Payload file not found")
+            return
+        }
+        
+        do {
+            let payloadData = try Data(contentsOf: URL(fileURLWithPath: payloadPath))
+            guard let payloadDict = try JSONSerialization.jsonObject(with: payloadData, options: []) as? [String: Any] else {
+                showAlert(title: "Error", message: "Invalid payload format")
+                return
+            }
+            
+            let url = URL(string: "https://restapi.netmera.com/rest/3.0/sendBulkNotification")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("N79vhZlSKZCPYboSdLcJClI6d08G4mF2vMqUPR9Uvy8nBPDb_rB_8rQVPEjbkEw7", forHTTPHeaderField: "X-netmera-api-key")
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let requestBody: [String: Any] = [
+                "message": payloadDict["aps"] ?? [:],
+                "target": [
+                    "sendToAll": true
+                ]
+            ]
+            
+            let jsonData = try JSONSerialization.data(withJSONObject: requestBody, options: [])
+            request.httpBody = jsonData
+            
+            let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                    self?.sendPayloadButton.isEnabled = true
+                    
+                    if let error = error {
+                        self?.showAlert(title: "Error", message: "Failed to send push: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                        self?.showAlert(title: "Success", message: "Payload push notification sent successfully!")
+                    } else {
+                        self?.showAlert(title: "Error", message: "Failed to send payload push notification")
+                    }
+                }
+            }
+            task.resume()
+            
+        } catch {
+            activityIndicator.stopAnimating()
+            sendPayloadButton.isEnabled = true
             showAlert(title: "Error", message: "Failed to create request: \(error.localizedDescription)")
         }
     }

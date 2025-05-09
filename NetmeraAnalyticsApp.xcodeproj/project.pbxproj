@@ -652,7 +652,7 @@
 			repositoryURL = "https://github.com/Netmera/swift-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.25;
+				minimumVersion = 4.0.0;
 			};
 		};
 		A5C7AA672DBFDD5C00DFE41C /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
