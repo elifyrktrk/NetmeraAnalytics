@@ -18,6 +18,7 @@
 		A54BD71D2DAAEF7500DF080F /* NetmeraNotificationCore in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD71C2DAAEF7500DF080F /* NetmeraNotificationCore */; };
 		A54BD71F2DAAEF7500DF080F /* NetmeraNotificationInbox in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD71E2DAAEF7500DF080F /* NetmeraNotificationInbox */; };
 		A54BD7212DAAEF7500DF080F /* NetmeraNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = A54BD7202DAAEF7500DF080F /* NetmeraNotificationServiceExtension */; };
+		A5997E272DD3335400D147B2 /* MyNetmeraNotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A5997E202DD3335400D147B2 /* MyNetmeraNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A5C7AA692DBFDD5C00DFE41C /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = A5C7AA682DBFDD5C00DFE41C /* OHHTTPStubs */; };
 		A5C7AA6B2DBFDD5C00DFE41C /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A5C7AA6A2DBFDD5C00DFE41C /* OHHTTPStubsSwift */; };
 		A5F285C92DB0464A002913B8 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A5F285C82DB0464A002913B8 /* FirebaseAnalytics */; };
@@ -42,12 +43,34 @@
 			remoteGlobalIDString = A54BD6D32DAAEE1200DF080F;
 			remoteInfo = NetmeraAnalyticsApp;
 		};
+		A5997E252DD3335400D147B2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A54BD6CC2DAAEE1200DF080F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5997E1F2DD3335400D147B2;
+			remoteInfo = MyNetmeraNotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A5997E2C2DD3335400D147B2 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A5997E272DD3335400D147B2 /* MyNetmeraNotificationServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A54BD6D42DAAEE1200DF080F /* NetmeraAnalyticsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetmeraAnalyticsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54BD6ED2DAAEE1500DF080F /* NetmeraAnalyticsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetmeraAnalyticsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A54BD6F72DAAEE1500DF080F /* NetmeraAnalyticsAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetmeraAnalyticsAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5997E202DD3335400D147B2 /* MyNetmeraNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MyNetmeraNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -58,6 +81,27 @@
 			);
 			target = A54BD6D32DAAEE1200DF080F /* NetmeraAnalyticsApp */;
 		};
+		A5997E2B2DD3335400D147B2 /* Exceptions for "MyNetmeraNotificationServiceExtension" folder in "MyNetmeraNotificationServiceExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A5997E1F2DD3335400D147B2 /* MyNetmeraNotificationServiceExtension */;
+		};
+		A5997E2F2DD335BB00D147B2 /* Exceptions for "MyNetmeraNotificationServiceExtension" folder in "NetmeraAnalyticsApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				NotificationService.swift,
+			);
+			target = A54BD6D32DAAEE1200DF080F /* NetmeraAnalyticsApp */;
+		};
+		A5997E7B2DD3384F00D147B2 /* Exceptions for "NetmeraAnalyticsApp" folder in "MyNetmeraNotificationServiceExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Resources/Config/Netmera-Config.plist",
+			);
+			target = A5997E1F2DD3335400D147B2 /* MyNetmeraNotificationServiceExtension */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -65,6 +109,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				A5414B582DC2468E00CA5731 /* Exceptions for "NetmeraAnalyticsApp" folder in "NetmeraAnalyticsApp" target */,
+				A5997E7B2DD3384F00D147B2 /* Exceptions for "NetmeraAnalyticsApp" folder in "MyNetmeraNotificationServiceExtension" target */,
 			);
 			path = NetmeraAnalyticsApp;
 			sourceTree = "<group>";
@@ -77,6 +122,15 @@
 		A54BD6FA2DAAEE1500DF080F /* NetmeraAnalyticsAppUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = NetmeraAnalyticsAppUITests;
+			sourceTree = "<group>";
+		};
+		A5997E212DD3335400D147B2 /* MyNetmeraNotificationServiceExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				A5997E2F2DD335BB00D147B2 /* Exceptions for "MyNetmeraNotificationServiceExtension" folder in "NetmeraAnalyticsApp" target */,
+				A5997E2B2DD3335400D147B2 /* Exceptions for "MyNetmeraNotificationServiceExtension" folder in "MyNetmeraNotificationServiceExtension" target */,
+			);
+			path = MyNetmeraNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -121,6 +175,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5997E1D2DD3335400D147B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -130,6 +191,7 @@
 				A54BD6D62DAAEE1200DF080F /* NetmeraAnalyticsApp */,
 				A54BD6F02DAAEE1500DF080F /* NetmeraAnalyticsAppTests */,
 				A54BD6FA2DAAEE1500DF080F /* NetmeraAnalyticsAppUITests */,
+				A5997E212DD3335400D147B2 /* MyNetmeraNotificationServiceExtension */,
 				A54BD6D52DAAEE1200DF080F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -140,6 +202,7 @@
 				A54BD6D42DAAEE1200DF080F /* NetmeraAnalyticsApp.app */,
 				A54BD6ED2DAAEE1500DF080F /* NetmeraAnalyticsAppTests.xctest */,
 				A54BD6F72DAAEE1500DF080F /* NetmeraAnalyticsAppUITests.xctest */,
+				A5997E202DD3335400D147B2 /* MyNetmeraNotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -154,10 +217,12 @@
 				A54BD6D02DAAEE1200DF080F /* Sources */,
 				A54BD6D12DAAEE1200DF080F /* Frameworks */,
 				A54BD6D22DAAEE1200DF080F /* Resources */,
+				A5997E2C2DD3335400D147B2 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A5997E262DD3335400D147B2 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				A54BD6D62DAAEE1200DF080F /* NetmeraAnalyticsApp */,
@@ -233,6 +298,28 @@
 			productReference = A54BD6F72DAAEE1500DF080F /* NetmeraAnalyticsAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		A5997E1F2DD3335400D147B2 /* MyNetmeraNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5997E282DD3335400D147B2 /* Build configuration list for PBXNativeTarget "MyNetmeraNotificationServiceExtension" */;
+			buildPhases = (
+				A5997E1C2DD3335400D147B2 /* Sources */,
+				A5997E1D2DD3335400D147B2 /* Frameworks */,
+				A5997E1E2DD3335400D147B2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A5997E212DD3335400D147B2 /* MyNetmeraNotificationServiceExtension */,
+			);
+			name = MyNetmeraNotificationServiceExtension;
+			packageProductDependencies = (
+			);
+			productName = MyNetmeraNotificationServiceExtension;
+			productReference = A5997E202DD3335400D147B2 /* MyNetmeraNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -253,6 +340,9 @@
 					A54BD6F62DAAEE1500DF080F = {
 						CreatedOnToolsVersion = 16.2;
 						TestTargetID = A54BD6D32DAAEE1200DF080F;
+					};
+					A5997E1F2DD3335400D147B2 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
@@ -280,6 +370,7 @@
 				A54BD6D32DAAEE1200DF080F /* NetmeraAnalyticsApp */,
 				A54BD6EC2DAAEE1500DF080F /* NetmeraAnalyticsAppTests */,
 				A54BD6F62DAAEE1500DF080F /* NetmeraAnalyticsAppUITests */,
+				A5997E1F2DD3335400D147B2 /* MyNetmeraNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -300,6 +391,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A54BD6F52DAAEE1500DF080F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5997E1E2DD3335400D147B2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -330,6 +428,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A5997E1C2DD3335400D147B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -342,6 +447,11 @@
 			isa = PBXTargetDependency;
 			target = A54BD6D32DAAEE1200DF080F /* NetmeraAnalyticsApp */;
 			targetProxy = A54BD6F82DAAEE1500DF080F /* PBXContainerItemProxy */;
+		};
+		A5997E262DD3335400D147B2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5997E1F2DD3335400D147B2 /* MyNetmeraNotificationServiceExtension */;
+			targetProxy = A5997E252DD3335400D147B2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -605,6 +715,58 @@
 			};
 			name = Release;
 		};
+		A5997E292DD3335400D147B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MyNetmeraNotificationServiceExtension/MyNetmeraNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyNetmeraNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyNetmeraNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = netmera.NetmeraAnalyticsApp.MyNetmeraNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A5997E2A2DD3335400D147B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MyNetmeraNotificationServiceExtension/MyNetmeraNotificationServiceExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 95N24W2PH8;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MyNetmeraNotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MyNetmeraNotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = netmera.NetmeraAnalyticsApp.MyNetmeraNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -640,6 +802,15 @@
 			buildConfigurations = (
 				A54BD7092DAAEE1500DF080F /* Debug */,
 				A54BD70A2DAAEE1500DF080F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5997E282DD3335400D147B2 /* Build configuration list for PBXNativeTarget "MyNetmeraNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5997E292DD3335400D147B2 /* Debug */,
+				A5997E2A2DD3335400D147B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

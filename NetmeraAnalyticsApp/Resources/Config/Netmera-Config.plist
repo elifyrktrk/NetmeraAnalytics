@@ -4,6 +4,8 @@
 <dict>
 	<key>sdk_params</key>
 	<dict>
+        <key>app_group_name</key>
+        <string>group.netmera.netmeraanalyticsapp</string>
 		<key>use_ui_scene</key>
 		<true/>
 		<key>api_key</key>
