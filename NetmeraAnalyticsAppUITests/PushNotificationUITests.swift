@@ -67,13 +67,15 @@ class PushNotificationUITests: XCTestCase {
         // Push alert'ini doğrula
         var pushAlert = app.alerts["Push Geldi"]
         XCTAssertTrue(pushAlert.waitForExistence(timeout: 10), "Push alert'i çıkmadı")
-    
-    
-       
-     
-    
-     
-
+    }
+    func testAppGoesToBackgroundAndReturnsToForeground() {
+        XCUIApplication().activate() // Uygulamayı ön plana alır
+        XCUIDevice.shared.press(.home) // Uygulamayı arka plana atar
+      
+        XCUIApplication().activate()
+        XCUIDevice.shared.press(.home)
+        sleep(5) // 5 saniye arka planda kalır
+        XCUIApplication().activate() // Tekrar ön plana getirir
     }
     
     
